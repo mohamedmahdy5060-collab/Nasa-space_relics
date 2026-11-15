@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPACE RELICS | The Museum of Forgotten Machines</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="top">
+ <div class="hero">
+  <div class="kicker">NASA SPACE ARCHIVE · AN INTERACTIVE STORY MUSEUM</div>
+  <h1>SPACE<br>RELICS</h1>
+  <h2>They left. Their legacy didn't.</h2>
+  <p>Explore the machines, experiments, and landing equipment humans left on the Moon and Mars — and discover why their stories still matter.</p>
+  <a class="btn" href="#archive">EXPLORE THE ARCHIVE ↓</a>
+ </div>
+</header>
+<nav>
+ <a href="#about">The Mission</a><a href="#archive">Moon & Mars Archive</a><a href="#timeline">Timeline</a><a href="#legacy">Their Legacy</a><a href="#sources">NASA Sources</a>
+</nav>
+<section id="about">
+ <div class="section-kicker">THE IDEA</div>
+ <h2 class="section-title">A museum without walls.</h2>
+ <p class="lead">When a space mission ends, its hardware does not always come home. Some machines were deliberately left behind to save weight, some became silent after years of work, and some scientific instruments were designed to remain on another world. These objects are not just leftovers: they are evidence of exploration.</p>
+ <div class="notice"><strong>Important distinction:</strong> “Abandoned” does not always mean broken or useless. Apollo descent stages and rovers were intentionally left on the Moon; some experiments were switched off; Mars landers and rovers became silent when their missions ended. The stories below explain which is which.</div>
+ <div class="stats">
+  <div class="stat"><strong>2 WORLDS</strong><span>Moon & Mars</span></div>
+  <div class="stat"><strong>11 RELICS</strong><span>Vehicles, landers & experiments</span></div>
+  <div class="stat"><strong>1 LEGACY</strong><span>Knowledge that remains on Earth</span></div>
+ </div>
+</section>
+<section id="archive">
+ <div class="section-kicker">THE COLLECTION</div>
+ <h2 class="section-title">Choose a world. Meet its relics.</h2>
+ <p class="lead">Select any exhibit to open its full story, mission facts, timeline, and scientific legacy.</p>
+ <div class="filters">
+  <button class="filter active" data-filter="all">All exhibits</button>
+  <button class="filter" data-filter="Moon">🌕 Moon</button>
+  <button class="filter" data-filter="Mars">🔴 Mars</button>
+ </div>
+ <div class="grid" id="cards"></div>
+ <div class="detail" id="detail" aria-live="polite"></div>
+</section>
+<section id="timeline">
+ <div class="section-kicker">FROM THE ARCHIVE</div>
+ <h2 class="section-title">A timeline of human footprints.</h2>
+ <div class="timeline">
+  <div class="time-item"><strong>1969</strong><br>Apollo 11 lands on the Moon; astronauts deploy early science equipment and a laser retroreflector.</div>
+  <div class="time-item"><strong>1971–1972</strong><br>Apollo 15, 16 and 17 use electric Lunar Roving Vehicles. Apollo crews leave descent stages and scientific equipment on the surface.</div>
+  <div class="time-item"><strong>1977</strong><br>NASA switches off the Apollo Lunar Surface Experiments Package stations after years of science operations.</div>
+  <div class="time-item"><strong>1997</strong><br>Mars Pathfinder lands with Sojourner, the first successful wheeled rover to explore Mars.</div>
+  <div class="time-item"><strong>2004</strong><br>Spirit and Opportunity arrive on Mars and begin exploring evidence of ancient water.</div>
+  <div class="time-item"><strong>2008</strong><br>Phoenix lands in the Martian Arctic and studies ice-rich soil.</div>
+  <div class="time-item"><strong>2010–2011</strong><br>Spirit falls silent; NASA ends attempts to contact it in 2011.</div>
+  <div class="time-item"><strong>2018–2019</strong><br>Opportunity's last communication comes during a planet-wide dust storm; NASA declares the mission over in 2019.</div>
+  <div class="time-item"><strong>2022</strong><br>NASA retires the InSight lander after it stops communicating.</div>
+ </div>
+</section>
+<section id="legacy">
+ <div class="section-kicker">WHY THEY MATTER</div>
+ <h2 class="section-title">The machine stops. The discovery travels on.</h2>
+ <div class="compare">
+  <article><h3>Engineering</h3><p>Each mission tested ways to land, move, communicate, and survive in extreme environments. Later missions built on those lessons.</p></article>
+  <article><h3>Science</h3><p>Rocks, soil, seismic waves, dust, and the Moon’s interior all became easier to understand because instruments gathered data in place.</p></article>
+  <article><h3>Human history</h3><p>Tracks, landing stages, and instruments mark where people and their robots explored beyond Earth.</p></article>
+ </div>
+ <p class="lead" style="margin-top:24px"><strong>Our message:</strong> A mission can end, but the knowledge it creates can keep shaping the future.</p>
+</section>
+<section id="sources">
+ <div class="section-kicker">FACT CHECK & FURTHER READING</div>
+ <h2 class="section-title">NASA source archive.</h2>
+ <p class="lead">Mission dates and scientific details are based on NASA and NASA/JPL material. Story quotes are creative first-person retellings, not actual recordings or quotations from spacecraft.</p>
+ <div class="source-list">
+  <a href="https://www.nasa.gov/specials/apollo50th/missions.html" target="_blank" rel="noopener">NASA — Apollo missions & Lunar Rover</a>
+  <a href="https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf" target="_blank" rel="noopener">NASA — Lunar historic sites & Apollo artifacts</a>
+  <a href="https://www.nasa.gov/history/50-years-ago-apollo-17-post-mission-activities/" target="_blank" rel="noopener">NASA — Apollo 17 & ALSEP experiments</a>
+  <a href="https://science.nasa.gov/mission/mars-pathfinder/" target="_blank" rel="noopener">NASA — Mars Pathfinder</a>
+  <a href="https://science.nasa.gov/mission/mer-spirit/" target="_blank" rel="noopener">NASA — Spirit rover</a>
+  <a href="https://science.nasa.gov/mission/mer-opportunity/" target="_blank" rel="noopener">NASA — Opportunity rover</a>
+  <a href="https://science.nasa.gov/mission/mars-phoenix/" target="_blank" rel="noopener">NASA — Phoenix lander</a>
+  <a href="https://www.nasa.gov/missions/insight/nasa-retires-insight-mars-lander-mission-after-years-of-science/" target="_blank" rel="noopener">NASA — InSight mission retirement</a>
+  <a href="https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/" target="_blank" rel="noopener">NASA — Spirit & Opportunity overview</a>
+ </div>
+</section>
+<footer><strong>SPACE RELICS</strong><br>THE MUSEUM OF FORGOTTEN MACHINES<br><span class="small">An educational storytelling project · NASA is not affiliated with or endorsing this student project.</span></footer>
+<script src="script.js"></script>
+</body>
+</html>
