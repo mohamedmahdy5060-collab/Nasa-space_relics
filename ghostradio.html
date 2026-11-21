@@ -6,34 +6,36 @@
 <title>GHOST RADIO | Space Relics</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;900&family=IBM+Plex+Sans:wght@400;600&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0d0906;--wood:#4a2b12;--wood2:#2f1a09;--panel:#2a1f14;--ink:#f1e5d0;--dim:#a2907a;--acc:#ff9a4d;--scr:#0a0704;--glow:#ffb347}
-@media(prefers-color-scheme:light){:root{--bg:#ece2d0;--wood:#7a4a24;--wood2:#5b3416;--panel:#d8c9a8;--ink:#2a1d12;--dim:#6b5a48;--acc:#a8420f}}
+body{--bg:#070b14;--wood:#2b3648;--wood2:#151c29;--panel:#1b2433;--ink:#e6f1ff;--dim:#8a9bb5;--acc:#7fd4ff;--glow:#9fe8ff;--on:#06121c;--scr:#04070d}
+body[data-b=mars]{--bg:#140805;--wood:#6b2f14;--wood2:#3a170a;--panel:#2a160d;--ink:#ffe9d6;--dim:#b58f78;--acc:#ff7a3a;--glow:#ffb347;--on:#1a0800;--scr:#0a0503}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.7 'IBM Plex Sans',system-ui,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+body{margin:0;background:radial-gradient(90vw 60vh at 50% 0,color-mix(in srgb,var(--acc) 14%,transparent),transparent),var(--bg);color:var(--ink);font:400 1.05rem/1.7 'IBM Plex Sans',system-ui,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);transition:background .8s}
 [lang=ar] body,[lang=ar] button{font-family:Tajawal,system-ui,sans-serif}
 main{max-width:760px;margin:auto;padding:22px 16px 50px}
-h1{font:900 clamp(2.6rem,10vw,5rem)/1 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:14px 0 8px}
-.lead{color:var(--dim);max-width:560px}
-.top{display:flex;justify-content:space-between;align-items:center}
-.top a{color:var(--dim);text-decoration:none}
-.radio{margin:22px 0;background:linear-gradient(var(--wood),var(--wood2));border-radius:26px;padding:16px;box-shadow:0 12px 0 #0004}
+h1{font:900 clamp(2.6rem,10vw,5rem)/1 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:14px 0 8px;color:var(--glow);text-shadow:0 0 30px color-mix(in srgb,var(--glow) 40%,transparent);transition:color .8s}
+.lead{color:var(--dim);max-width:560px;margin:.3em 0}
+.top{display:flex;justify-content:space-between;align-items:center}.top a{color:var(--dim);text-decoration:none}
+.seg{display:flex;gap:8px;margin:16px 0 0}.seg button{flex:1;font-size:1.05rem}
+.radio{margin:16px 0;background:linear-gradient(var(--wood),var(--wood2));border-radius:26px;padding:16px;box-shadow:0 12px 0 #0005,0 0 60px color-mix(in srgb,var(--acc) 18%,transparent);transition:background .8s}
 .face{background:var(--panel);border-radius:16px;padding:14px}
-.scr{background:repeating-linear-gradient(0deg,#ffb34710 0 1px,transparent 1px 4px),var(--scr);color:var(--glow);border-radius:10px;padding:14px;min-height:260px;text-shadow:0 0 8px #ffb34788;box-shadow:inset 0 0 40px #000e}
+.scr{background:repeating-linear-gradient(0deg,color-mix(in srgb,var(--glow) 7%,transparent) 0 1px,transparent 1px 4px),var(--scr);color:var(--glow);border-radius:10px;padding:14px;min-height:270px;text-shadow:0 0 8px color-mix(in srgb,var(--glow) 55%,transparent);box-shadow:inset 0 0 40px #000e}
+.scr.lk{box-shadow:inset 0 0 40px #000e,0 0 24px color-mix(in srgb,var(--glow) 50%,transparent)}
 canvas{width:100%;height:64px;display:block}
-#rn{font:600 1.25rem Fraunces,serif;min-height:1.6em}
-#rt{font:1.1rem/1.7 Georgia,serif;min-height:7em;margin:6px 0;transition:filter .25s}
-#rm{font-size:.85rem;color:#9b8a70}
+#rn{font:600 1.3rem Fraunces,serif;min-height:1.6em}
+#rt{font:1.15rem/1.75 Georgia,serif;min-height:7.5em;margin:6px 0;transition:filter .25s}
+#rm{font-size:.85rem;color:var(--dim)}
 .scale{position:relative;margin-top:14px;height:46px;border-bottom:2px solid var(--dim);direction:ltr}
 .scale i{position:absolute;bottom:0;width:1px;height:10px;background:var(--dim)}.scale i.b{height:20px}
 .scale span{position:absolute;bottom:22px;transform:translateX(-50%);font-size:.7rem;color:var(--dim)}
-.scale u{position:absolute;bottom:0;width:7px;height:7px;border-radius:50%;background:var(--dim);transform:translateX(-50%);opacity:.6;text-decoration:none}
-.scale u.h{background:var(--glow);opacity:1}
-#needle{position:absolute;bottom:0;width:3px;height:46px;background:var(--acc);transform:translateX(-50%)}
+.scale u{position:absolute;bottom:2px;width:9px;height:9px;border-radius:50%;background:var(--dim);transform:translateX(-50%);opacity:.55}
+.scale u.h{background:var(--glow);opacity:1;box-shadow:0 0 10px var(--glow)}
+#needle{position:absolute;bottom:0;width:3px;height:46px;background:var(--acc);transform:translateX(-50%);box-shadow:0 0 10px var(--acc)}
 input[type=range]{width:100%;direction:ltr;accent-color:var(--acc);height:40px;margin-top:6px}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px}
-button{font:inherit;font-weight:600;background:var(--acc);color:#1a0d00;border:0;border-radius:12px;padding:10px 18px;cursor:pointer;min-height:44px}
+button{font:inherit;font-weight:600;background:var(--acc);color:var(--on);border:0;border-radius:12px;padding:10px 18px;cursor:pointer;min-height:44px}
 button.ghost{background:transparent;color:var(--ink);border:1px solid var(--dim)}
-.lamp{width:12px;height:12px;border-radius:50%;background:#5a3a1a}.lamp.on{background:var(--glow);box-shadow:0 0 12px var(--glow)}
+button.sel{background:var(--acc);color:var(--on);border-color:var(--acc)}
+.lamp{width:12px;height:12px;border-radius:50%;background:#444}.lamp.on{background:var(--glow);box-shadow:0 0 12px var(--glow)}
 :focus-visible{outline:3px solid var(--glow);outline-offset:2px}
 .end{display:none;border:1px solid var(--acc);border-radius:14px;padding:18px;margin:10px 0}
 .end h2{font:700 1.5rem Fraunces,serif;color:var(--acc);margin:0 0 6px}
@@ -41,13 +43,15 @@ button.ghost{background:transparent;color:var(--ink);border:1px solid var(--dim)
 .prog,#log{color:var(--dim);font-size:.9rem}
 </style>
 </head>
-<body>
+<body data-b="moon">
 <main>
 <div class="top"><a href="index.html" id="bk"></a><button class="ghost lgb"></button></div>
 <h1>GHOST RADIO</h1>
 <p class="lead" id="ld"></p>
+<div class="seg"><button id="bM" class="ghost"></button><button id="bR" class="ghost"></button></div>
+<p class="lead" id="bl"></p>
 <div class="radio"><div class="face">
- <div class="scr">
+ <div class="scr" id="scr">
   <canvas id="wave" width="600" height="64" aria-hidden="true"></canvas>
   <div id="rn" aria-live="polite"></div>
   <div id="rt" aria-live="polite"></div>
@@ -55,7 +59,7 @@ button.ghost{background:transparent;color:var(--ink);border:1px solid var(--dim)
  </div>
  <div class="scale" id="scale" aria-hidden="true"><div id="needle"></div></div>
  <input id="dial" type="range" min="880" max="1080" value="880" aria-label="Tuning dial">
- <div class="row"><span class="lamp" id="lamp"></span><button id="pw"></button><button class="ghost" id="vo" aria-pressed="true"></button><button class="ghost" id="hb"></button></div>
+ <div class="row"><span class="lamp" id="lamp"></span><button id="pw"></button><button class="ghost" id="sc"></button><button class="ghost" id="vo"></button><button class="ghost" id="hb"></button></div>
 </div></div>
 <div class="end" id="end" aria-live="polite">
  <h2 id="eT"></h2><p id="eS"></p><p><b id="eC"></b></p>
@@ -70,62 +74,76 @@ button.ghost{background:transparent;color:var(--ink);border:1px solid var(--dim)
 <script src="relics.js"></script>
 <script src="relics_ar.js"></script>
 <script>
-const $=id=>document.getElementById(id),N=R.length;
+const $=id=>document.getElementById(id),BANDS=["Moon","Mars"],COL={Moon:"#9fe8ff",Mars:"#ffb347"};
 const LAST={2:"1977-09-30",5:"1997-09-27",6:"2010-03-22",7:"2018-06-10",8:"2008-11-02",9:"2022-12-15",10:"2024-01-18"};
-let ac,ng,on=false,voice=true,sig=0,cs=-1,ix=0,tm=null,dead=false;const heard=new Set(HEARD);
+let band="Moon",ac,ng,flt,lfo,lg,hum,hg,on=false,voice=true,sig=0,cs=-1,ix=0,tok=0,playing=false,dead=false,held=-1,scanT=null,tmo=null;const heard=new Set(HEARD);
+const BI={},FQ={};BANDS.forEach(b=>{BI[b]=R.map((r,i)=>i).filter(i=>R[i].w===b);BI[b].forEach((i,k)=>FQ[i]=+(89+(k+.5)*18/BI[b].length).toFixed(1))});
 function audio(){ac=new(window.AudioContext||window.webkitAudioContext)();const n=ac.sampleRate*2,b=ac.createBuffer(1,n,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;
- const s=ac.createBufferSource();s.buffer=b;s.loop=true;const f=ac.createBiquadFilter();f.type="bandpass";f.frequency.value=2200;f.Q.value=.4;ng=ac.createGain();ng.gain.value=.2;s.connect(f).connect(ng).connect(ac.destination);s.start()}
+ const s=ac.createBufferSource();s.buffer=b;s.loop=true;flt=ac.createBiquadFilter();flt.type="bandpass";ng=ac.createGain();ng.gain.value=.2;s.connect(flt).connect(ng).connect(ac.destination);s.start();
+ lfo=ac.createOscillator();lg=ac.createGain();lfo.connect(lg);lg.connect(flt.frequency);lfo.start();
+ hum=ac.createOscillator();hg=ac.createGain();hg.gain.value=0;hum.connect(hg).connect(ac.destination);hum.start();tone()}
+function tone(){if(!ac)return;const m=band==="Moon";flt.frequency.value=m?3400:800;flt.Q.value=m?1.3:.45;lfo.frequency.value=m?.05:.17;lg.gain.value=m?0:450;hum.frequency.value=m?330:96;hum.type=m?"sine":"triangle"}
+function beep(){if(!ac)return;const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=band==="Moon"?1320:660;g.gain.setValueAtTime(.07,ac.currentTime);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.3);o.connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+.3)}
 const lines=i=>{const x=T(R[i]);return[x.q,...(x.s.match(/[^.]+\.?/g)||[]).slice(0,3).map(t=>t.trim())]};
 function cor(t,p){const g="░▒▓#%?";let o="";for(const c of t)o+=(c!==" "&&Math.random()<p)?g[Math.random()*g.length|0]:c;return o}
-function tts(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=L("en-US","ar-SA");u.rate=.85;u.pitch=.8;u.volume=Math.min(1,sig);speechSynthesis.speak(u)}
-function say(t){if(!voice||sig<.5||cs<0)return;try{speechSynthesis.cancel()}catch(e){}if(window._a)_a.pause();
- if(lang!=="en"){tts(t);return}
- const key=R[cs].n.split(" ")[0].toLowerCase().replace(/[^a-z0-9]+/g,"-");let done=0;const fb=()=>{if(!done){done=1;tts(t)}};
- const a=new Audio("audio/"+key+"-"+(ix+1)+".mp3");a.volume=Math.min(1,sig);window._a=a;a.onerror=fb;a.play().catch(fb)}
+function pick(){const vs=speechSynthesis.getVoices(),c=vs.filter(v=>v.lang.toLowerCase().startsWith(lang==="ar"?"ar":"en"));return c.find(v=>/natural|neural|online/i.test(v.name)&&/guy|ryan|davis|male|david|hamed|naayf|tarik/i.test(v.name))||c.find(v=>/natural|neural|online|google/i.test(v.name))||c.find(v=>/male|david|daniel|mark/i.test(v.name))||c[0]}
+function stopAll(){tok++;playing=false;clearTimeout(tmo);try{speechSynthesis.cancel()}catch(e){}}
+function speak(t,done){const my=tok;let fin=false;const end=()=>{if(fin)return;fin=true;clearTimeout(tmo);setTimeout(()=>{if(my===tok)done()},900)};
+ if(!voice||!window.speechSynthesis){tmo=setTimeout(end,Math.max(4500,t.length*75));return}
+ speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t),v=pick();if(v)u.voice=v;u.lang=v?v.lang:L("en-US","ar-SA");u.rate=.9;u.pitch=band==="Moon"?.8:.92;u.volume=1;u.onend=end;u.onerror=end;speechSynthesis.speak(u);tmo=setTimeout(end,Math.max(9000,t.length*140))}
+function play(){if(playing)return;playing=true;const i=cs,my=++tok,ls=lines(i);
+ const go=()=>{if(my!==tok)return;speak(ls[ix],()=>{if(my!==tok)return;if(ix<ls.length-1){ix++;go()}else{playing=false;finish(i)}})};go()}
+function finish(i){dead=true;held=i;$("rn").textContent="";$("rt").textContent="";$("rm").textContent="";
+ setTimeout(()=>{dead=false;heard.add(i);try{localStorage.sr_found=JSON.stringify([...heard])}catch(e){}mark();ui();const x=T(R[i]);
+  $("eT").textContent=x.e+" "+x.g;$("eS").textContent=x.f.join(" · ");
+  if(LAST[i]){let t=Math.floor((Date.now()-new Date(LAST[i]+"T00:00:00Z"))/1000);const y=Math.floor(t/31557600);t-=y*31557600;const d=Math.floor(t/86400);t-=d*86400;const h=Math.floor(t/3600);$("eC").textContent=L(`Silent for ${y} years, ${d} days, ${h} hours`,`صامتة منذ ${y} سنة و${d} يومًا و${h} ساعة`)}else $("eC").textContent="";
+  $("end").style.display="block";$("end").scrollIntoView({behavior:"smooth",block:"nearest"});$("rt").textContent="…"+x.n+L(" has gone quiet."," صمتت.");cs=-1},2800)}
 const sc=$("scale");for(let f=880;f<=1080;f+=10){const i=document.createElement("i");i.style.left=((f-880)/2)+"%";if(f%50===0){i.className="b";const s=document.createElement("span");s.style.left=i.style.left;s.textContent=f/10;sc.appendChild(s)}sc.appendChild(i)}
-R.forEach((r,i)=>{const u=document.createElement("u");u.id="d"+i;u.style.left=((r.fr*10-880)/2)+"%";sc.appendChild(u)});
-function mark(){R.forEach((r,i)=>$("d"+i).className=heard.has(i)?"h":"")}
+function dots(){sc.querySelectorAll("u").forEach(u=>u.remove());BI[band].forEach(i=>{const u=document.createElement("u");u.id="d"+i;u.style.left=((FQ[i]*10-880)/2)+"%";sc.appendChild(u)});mark()}
+function mark(){BI[band].forEach(i=>{const u=$("d"+i);if(u)u.className=heard.has(i)?"h":""})}
+function setB(b){stopScan();stopAll();cs=-1;held=-1;dead=false;band=b;document.body.dataset.b=b.toLowerCase();$("end").style.display="none";tone();dots();ui()}
+function stopScan(){clearInterval(scanT);scanT=null}
 function tune(){
  const f=+$("dial").value;$("needle").style.left=((f-880)/2)+"%";
- if(!on){$("rn").textContent=L("No signal","لا توجد إشارة");$("rt").textContent=L("Press Power on, then turn the dial slowly.","اضغط تشغيل ثم حرّك المؤشر ببطء.");$("rm").textContent=(f/10).toFixed(1)+" MHz";return}
- let b=-1,bd=1e9;R.forEach((r,i)=>{const d=Math.abs(r.fr*10-f);if(d<bd){bd=d;b=i}});
- sig=dead?0:Math.max(0,1-bd/10);if(window._a)_a.volume=Math.min(1,sig);
- if(ac)ng.gain.setTargetAtTime(dead?0:.02+(1-sig)*.25,ac.currentTime,.05);
+ if(!on){$("rn").textContent=L("No signal","لا توجد إشارة");$("rt").textContent=L("Press Power on, then turn the dial slowly or use Auto-scan.","اضغط تشغيل ثم حرّك المؤشر ببطء أو استخدم المسح التلقائي.");$("rm").textContent=(f/10).toFixed(1)+" MHz";return}
+ let b=-1,bd=1e9;BI[band].forEach(i=>{const d=Math.abs(FQ[i]*10-f);if(d<bd){bd=d;b=i}});
+ sig=dead?0:Math.max(0,1-bd/12);
+ if(ac){ng.gain.setTargetAtTime(dead?0:.015+(1-sig)*.24,ac.currentTime,.05);hg.gain.setTargetAtTime(sig>.6&&!dead?.03:0,ac.currentTime,.1)}
+ $("scr").classList.toggle("lk",sig>.6&&!dead);
  if(dead)return;
  if(sig>.3){
-  if(cs!==b){cs=b;ix=0;$("end").style.display="none";clearInterval(tm);tm=setInterval(adv,6500);say(lines(b)[0])}
-  const x=T(R[b]),ls=lines(b);$("rn").textContent=x.e+" "+x.n;$("rt").style.filter=`blur(${((1-sig)*1.4).toFixed(1)}px)`;
-  $("rt").textContent=cor(ls[ix],Math.min(.95,(1-sig)*1.1+ix/(ls.length-1)*.25));
+  if(b===held)return;
+  if(cs!==b){stopAll();cs=b;ix=0;$("end").style.display="none";beep()}
+  const x=T(R[b]),ls=lines(b);$("rn").textContent=x.e+" "+x.n;$("rt").style.filter=`blur(${((1-sig)*1.1).toFixed(1)}px)`;
+  $("rt").textContent=cor(ls[ix],Math.min(.6,(1-sig)*.9+ix/(ls.length-1)*.12));
   $("rm").textContent=(f/10).toFixed(1)+" MHz · "+L("signal","الإشارة")+" "+Math.round(sig*100)+"%";
+  if(sig>.55&&!playing)play();
  }else{
-  if(cs>=0){try{speechSynthesis.cancel()}catch(e){}window._a&&_a.pause()}
-  cs=-1;clearInterval(tm);$("rt").style.filter="none";$("rn").textContent=L("No signal","لا توجد إشارة");$("rt").textContent=cor("kshhh fzzzt krrr",.2);$("rm").textContent=(f/10).toFixed(1)+" MHz";
+  held=-1;if(cs>=0){stopAll();cs=-1}
+  $("rt").style.filter="none";$("rn").textContent=L("No signal","لا توجد إشارة");$("rt").textContent=cor("kshhh fzzzt krrr",.2);$("rm").textContent=(f/10).toFixed(1)+" MHz";
  }
 }
-function adv(){
- if(cs<0)return;const i=cs,ls=lines(i);
- if(ix<ls.length-1){ix++;say(ls[ix]);return}
- clearInterval(tm);
- setTimeout(()=>{if(cs!==i)return;dead=true;try{speechSynthesis.cancel()}catch(e){}$("rn").textContent="";$("rt").textContent="";$("rm").textContent="";
-  setTimeout(()=>{dead=false;heard.add(i);try{localStorage.sr_found=JSON.stringify([...heard])}catch(e){}mark();ui();const x=T(R[i]);
-   $("eT").textContent=x.e+" "+x.g;$("eS").textContent=x.f.join(" · ");
-   if(LAST[i]){const c=()=>{let t=Math.floor((Date.now()-new Date(LAST[i]+"T00:00:00Z"))/1000);const y=Math.floor(t/31557600);t-=y*31557600;const d=Math.floor(t/86400);t-=d*86400;const h=Math.floor(t/3600);$("eC").textContent=L(`Silent for ${y} years, ${d} days, ${h} hours`,`صامتة منذ ${y} سنة و${d} يومًا و${h} ساعة`)};c()}else $("eC").textContent="";
-   $("end").style.display="block";$("end").scrollIntoView({behavior:"smooth",block:"nearest"});$("rn").textContent="";$("rt").textContent="…"+x.n+L(" has gone quiet."," صمتت.");cs=-1},3200)},2200)}
-$("pw").onclick=()=>{if(!ac)audio();on=!on;$("lamp").classList.toggle("on",on);on?ac.resume():ac.suspend();if(!on){try{speechSynthesis.cancel()}catch(e){}clearInterval(tm);cs=-1}ui()};
-$("vo").onclick=()=>{voice=!voice;if(!voice){try{speechSynthesis.cancel()}catch(e){}}ui()};
-$("hb").onclick=()=>{const f=$("dial").value/10,left=R.filter((r,i)=>!heard.has(i));if(!left.length){$("rm").textContent=L("You heard them all 🎉","سمعتها كلها 🎉");return}
- const n=left.reduce((a,b)=>Math.abs(b.fr-f)<Math.abs(a.fr-f)?b:a);$("rm").textContent=n.fr>f?L("💡 Try a higher frequency ▲","💡 جرّب تردّدًا أعلى ▲"):L("💡 Try a lower frequency ▼","💡 جرّب تردّدًا أقل ▼")};
-$("dial").oninput=tune;setInterval(tune,300);
+$("pw").onclick=()=>{if(!ac)audio();on=!on;$("lamp").classList.toggle("on",on);on?ac.resume():ac.suspend();if(!on){stopAll();stopScan();cs=-1}ui()};
+$("vo").onclick=()=>{voice=!voice;if(!voice)try{speechSynthesis.cancel()}catch(e){}ui()};
+$("sc").onclick=()=>{if(!on)return;if(scanT){stopScan();ui();return}
+ scanT=setInterval(()=>{const d=$("dial");let v=+d.value+1;if(v>1080)v=880;d.value=v;tune();if(sig>.6)stopScan()},60);ui()};
+$("hb").onclick=()=>{const f=$("dial").value/10,left=BI[band].filter(i=>!heard.has(i));if(!left.length){$("rm").textContent=L("You heard this whole band 🎉","سمعت كل هذا النطاق 🎉");return}
+ const n=left.reduce((a,b)=>Math.abs(FQ[b]-f)<Math.abs(FQ[a]-f)?b:a);$("rm").textContent=FQ[n]>f?L("💡 Try a higher frequency ▲","💡 جرّب تردّدًا أعلى ▲"):L("💡 Try a lower frequency ▼","💡 جرّب تردّدًا أقل ▼")};
+$("dial").oninput=()=>{stopScan();tune()};$("bM").onclick=()=>setB("Moon");$("bR").onclick=()=>setB("Mars");setInterval(tune,300);
 $("go").onclick=()=>{const v=$("msg").value.trim();if(!v)return;const li=document.createElement("li");li.textContent=L("Sent: “","أُرسلت: «")+v+L("”","»");$("log").prepend(li);$("msg").value=""};
-function ui(){$("bk").textContent=L("← Back to the museum","← العودة إلى المتحف");
- $("ld").textContent=L(`${N} machines on the Moon and Mars are fading out. Some still work, some went silent. Turn the dial slowly, hold a frequency, and hear their story break up.`,`${N} آلة على القمر والمريخ تخفت. بعضها ما زال يعمل وبعضها صمت. حرّك المؤشر ببطء وثبّت التردد واستمع إلى قصتها وهي تتلاشى.`);
- $("pw").textContent=on?L("Power off","إيقاف"):L("Power on","تشغيل");$("vo").textContent=L("Voice: ","الصوت: ")+(voice?L("on","يعمل"):L("off","مغلق"));$("vo").setAttribute("aria-pressed",voice);$("hb").textContent=L("💡 Hint","💡 تلميح");
+function ui(){const m=band==="Moon",nb=BI[band].filter(i=>heard.has(i)).length;
+ $("bk").textContent=L("← Back to the museum","← العودة إلى المتحف");
+ $("ld").textContent=L("Eleven machines on the Moon and Mars are fading out. Hold a frequency and hear each one break up.","إحدى عشرة آلة على القمر والمريخ تخفت. ثبّت التردد واستمع إليها وهي تتلاشى.");
+ $("bM").textContent=L("🌕 Moon","🌕 القمر");$("bR").textContent=L("🔴 Mars","🔴 المريخ");$("bM").classList.toggle("sel",m);$("bR").classList.toggle("sel",!m);
+ $("bl").textContent=m?L("Moon band: no air, so signals arrive thin, cold and sharp.","نطاق القمر: لا هواء، فالإشارات تصل رفيعة وباردة وحادة."):L("Mars band: dust and wind, so signals crackle and sway.","نطاق المريخ: غبار ورياح، فالإشارات تتقطع وتتمايل.");
+ $("pw").textContent=on?L("Power off","إيقاف"):L("Power on","تشغيل");$("sc").textContent=scanT?L("⏹ Stop scan","⏹ إيقاف المسح"):L("📡 Auto-scan","📡 مسح تلقائي");
+ $("vo").textContent=L("Voice: ","الصوت: ")+(voice?L("on","يعمل"):L("off","مغلق"));$("hb").textContent=L("💡 Hint","💡 تلميح");
  $("lbl").textContent=L("Send a signal back. Nobody will answer, but it will be sent.","أرسل إشارة. لن يرد أحد، لكنها ستُرسل.");$("msg").placeholder=L("Write a short message","اكتب رسالة قصيرة");$("go").textContent=L("Send signal","إرسال");
- $("prog").textContent=L("Relics heard: ","آثار سمعتها: ")+heard.size+" / "+N+(heard.size===N?L("  ·  You heard them all."," · سمعتها كلها."):"");
+ $("prog").textContent=L("This band: ","هذا النطاق: ")+nb+" / "+BI[band].length+L("  ·  All: ","  ·  الكل: ")+heard.size+" / "+R.length;
  $("ft").textContent=L("Spoken lines are creative first-person retellings, not real recordings. Dates are based on NASA/JPL material.","الجمل المنطوقة إعادة سرد إبداعية وليست تسجيلات حقيقية. التواريخ مبنية على مواد ناسا ومختبر الدفع النفاث.");tune()}
-window.onLang=ui;mark();
-(function w(t){const c=$("wave"),x=c.getContext("2d");x.clearRect(0,0,600,64);x.strokeStyle="#ffb347";x.lineWidth=2;x.beginPath();const q=dead||!on;
- for(let i=0;i<600;i+=3){const y=32+(Math.random()-.5)*(q?2:(1-sig)*55+4)+(q?0:Math.sin(i*.04+t*.008)*sig*20);i?x.lineTo(i,y):x.moveTo(i,y)}x.stroke();requestAnimationFrame(w)})(0);
+window.onLang=ui;dots();
+(function w(t){const c=$("wave"),x=c.getContext("2d"),m=band==="Moon",q=dead||!on;x.clearRect(0,0,600,64);x.strokeStyle=COL[band];x.lineWidth=m?1.5:2.5;x.beginPath();
+ for(let i=0;i<600;i+=m?2:3){const y=32+(Math.random()-.5)*(q?2:(1-sig)*(m?40:62)+4)+(q?0:Math.sin(i*.04+t*.008)*sig*20+(m?0:Math.sin(i*.012+t*.003)*9*(1-sig)));i?x.lineTo(i,y):x.moveTo(i,y)}x.stroke();requestAnimationFrame(w)})(0);
 setLang(lang);
 </script>
 </body>
