@@ -3,16 +3,16 @@
 const $=s=>document.querySelector(s),c=old.cloneNode();old.replaceWith(c);c.style.touchAction="auto";
 ["gl","gt","gr","gx"].forEach(i=>{const b=$("#"+i);b.replaceWith(b.cloneNode(true))});
 const og=$("#gs");og.id="gs_old";og.style.display="none";
-const hud=document.createElement("p"),gm=document.createElement("p");hud.id="ghud";hud.style.cssText="font:700 1.05rem/1.5 monospace;margin:10px 0 0";gm.className="lead";gm.style.marginTop="6px";og.after(hud,gm);
+const hud=document.createElement("p"),gm=document.createElement("p");hud.id="ghud";hud.style.cssText="font:700 1.05rem/1.5 monospace;margin:10px 0 0";gm.className="lead";gm.style.marginTop="6px";const lk=document.createElement("a");lk.className="btn";lk.href="ghostradio.html";lk.style.cssText="display:none;margin-top:10px";lk.textContent=L("📻 Hear the relics you joined","📻 استمعي للآثار التي انضممتِ إليها");og.after(hud,gm,lk);gm.style.whiteSpace="pre-line";
 const g=c.getContext("2d"),W=c.width=720,H=c.height=420,K={},msg=t=>gm.textContent=t;
-const LV=[{n:"🌕 Moon",a:"🌕 القمر",g:.022,pw:80,col:"#8d97ad",w:0},{n:"🔴 Mars",a:"🔴 المريخ",g:.032,pw:70,col:"#b5532f",w:0},{n:"🌪️ Dust storm",a:"🌪️ عاصفة غبار",g:.032,pw:60,col:"#a2482a",w:.012}];
+const LV=[{n:"🌕 Moon",a:"🌕 القمر",g:.022,pw:80,col:"#8d97ad",w:0},{n:"🔴 Mars",a:"🔴 المريخ",g:.032,pw:70,col:"#b5532f",w:0},{n:"🌪️ Dust storm",a:"🌪️ عاصفة غبار",g:.032,pw:60,col:"#a2482a",w:.012},{n:"🚁 Great storm",a:"🚁 العاصفة الكبرى",g:.034,pw:55,col:"#8a3b22",w:.016,fu:130}];
 const ST=Array.from({length:70},()=>[Math.random()*W,Math.random()*H*.75,Math.random()*1.4+.3]);
 let s,pts,pad,lv=0,un=0,T=0,last=performance.now();try{un=+localStorage.sr_lv||0}catch(e){}
 const ty=px=>{const i=Math.min(pts.length-2,Math.max(0,Math.floor(px/20))),a=pts[i],b=pts[i+1];return a+(b-a)*((px-i*20)/20)};
 function bar(){const e=$("#lv");e.innerHTML="";LV.forEach((l,i)=>{const b=document.createElement("button");b.className="nb";b.style.margin="0";b.textContent=(i>un?"🔒 ":"")+L(l.n,l.a);b.disabled=i>un;if(i===lv)b.style.borderColor="var(--cy)";b.onclick=()=>{lv=i;init()};e.appendChild(b)})}
 window.gbar=bar;
 function init(){const P=LV[lv].pw;pad=60+Math.floor(Math.random()*(W-120-P));pad-=pad%20;pts=[];let y=H-80;for(let i=0;i<=W/20+1;i++){const px=i*20;if(px>=pad&&px<=pad+P)pts.push(H-70);else{y=Math.max(H-170,Math.min(H-40,y+(Math.random()-.5)*44));pts.push(y)}}
-s={x:W/2,y:50,vx:(Math.random()-.5)*1,vy:0,a:0,f:100,st:"idle"};T=0;bar();
+s={x:W/2,y:50,vx:(Math.random()-.5)*1,vy:0,a:0,f:LV[lv].fu||100,st:"idle"};T=0;bar();
 msg(L("Press 🔥 THRUST or Space to start. ◀ ▶ tilt the ship, and thrust pushes the way it points. Land slowly and upright on the glowing pad.","اضغط 🔥 أو المسافة للبدء. ◀ ▶ تميل المركبة، والدفع يتجه حسب الميل. اهبط ببطء وبشكل مستقيم على المنصة المضيئة."))}
 const start=()=>{if(s.st==="idle")s.st="play"};
 function step(f){if(s.st!=="play")return;T+=f;const V=LV[lv];if(K.l)s.a-=.04*f;if(K.r)s.a+=.04*f;
@@ -20,8 +20,15 @@ if(K.t&&s.f>0){s.vx+=Math.sin(s.a)*.055*f;s.vy-=Math.cos(s.a)*.055*f;s.f-=.3*f}
 s.vy+=V.g*f;s.vx+=Math.sin(T/60)*V.w*f;s.x+=s.vx*f;s.y+=s.vy*f;
 if(s.x<0||s.x>W){s.vx*=-.5;s.x=Math.max(0,Math.min(W,s.x))}
 if(s.y+12>=ty(s.x)){const on=s.x>pad+8&&s.x<pad+V.pw-8,ok=on&&Math.abs(s.vy)<1.1&&Math.abs(s.vx)<.8&&Math.abs(s.a)<.3;s.st=ok?"win":"crash";s.y=ty(s.x)-12;
-if(ok){let x=L("🎉 Touchdown! Your descent stage stays here forever, a new relic.","🎉 هبوط ناجح! مرحلة هبوطك ستبقى هنا للأبد، أثر جديد.");if(lv<2&&un<lv+1){un=lv+1;try{localStorage.sr_lv=un}catch(e){}x+=L(" Next level unlocked!"," فُتح المستوى التالي!");bar()}msg(x)}
+if(ok)win();
 else{const r=[];if(!on)r.push(L("you missed the pad","أخطأت المنصة"));if(Math.abs(s.vy)>=1.1)r.push(L("falling too fast","السقوط سريع"));if(Math.abs(s.vx)>=.8)r.push(L("drifting sideways","انجراف جانبي"));if(Math.abs(s.a)>=.3)r.push(L("tilted too much","ميلان كبير"));msg("💥 "+r.join(" · ")+L(". Press R or ↻.","، اضغط R أو ↻."))}}}
+function win(){const V=LV[lv],ctr=pad+V.pw/2,sc=Math.max(0,Math.round(s.f*10+(1.1-Math.abs(s.vy))*500+Math.max(0,300-Math.abs(s.x-ctr)*10))),st=1+(s.f>30)+(Math.abs(s.vy)<.6&&Math.abs(s.a)<.1);
+let B={};try{B=JSON.parse(localStorage.sr_best||"{}")}catch(e){}const nb=sc>(B[lv]||0);if(nb){B[lv]=sc;try{localStorage.sr_best=JSON.stringify(B)}catch(e){}}
+let W=[];try{W=JSON.parse(localStorage.sr_won||"[]")}catch(e){}const first=!W.includes(lv);if(first){W.push(lv);try{localStorage.sr_won=JSON.stringify(W)}catch(e){}}
+let x=L("🎉 Touchdown! ","🎉 هبوط ناجح! ")+"⭐".repeat(st)+"  "+L("Score ","النتيجة ")+sc+(nb?L(" · NEW BEST!"," · رقم قياسي!"):L(" · best "," · الأفضل ")+B[lv]);
+if(lv<3&&un<lv+1){un=lv+1;try{localStorage.sr_lv=un}catch(e){}x+=L(" Next level unlocked!"," فُتح المستوى التالي!");bar()}
+if(first&&[0,1,2].every(i=>W.includes(i))){x+=L("\n🏆 MISSION COMPLETE: you landed on the Moon, on Mars and through the dust storm. You are part of the archive now. A bonus level is unlocked!","\n🏆 اكتملت المهمة: هبطتِ على القمر والمريخ وسط العاصفة. صرتِ جزءًا من الأرشيف! فُتح مستوى إضافي!");lk.style.display="inline-block"}
+msg(x)}
 function draw(){const V=LV[lv];g.clearRect(0,0,W,H);g.fillStyle="#cfe3ff";ST.forEach(p=>g.fillRect(p[0],p[1],p[2],p[2]));
 g.fillStyle=V.col;g.beginPath();g.moveTo(0,H);pts.forEach((y,i)=>g.lineTo(i*20,y));g.lineTo(W+20,H);g.fill();
 g.shadowColor="#5ee7ff";g.shadowBlur=18;g.fillStyle="#5ee7ff";g.fillRect(pad,H-72,V.pw,4);g.shadowBlur=0;
