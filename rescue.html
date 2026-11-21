@@ -34,6 +34,7 @@ input[type=range]{width:100%;accent-color:var(--cy);height:40px;direction:ltr}
 .op.ok{background:#3ddc9755;border-color:#3ddc97}.op.no{background:#ff4d6d44;border-color:#ff4d6d}
 .tel{font-family:monospace;color:var(--or);background:#00000055;padding:10px 12px;border-radius:10px}
 .wrow{margin:16px 0}.wrow b{font-size:1.05rem}.wrow em{float:right;font:800 1.3rem Orbitron,sans-serif;color:var(--or);font-style:normal}[dir=rtl] .wrow em{float:left}.bar2{position:relative;height:16px;border-radius:9px;background:#ffffff10;margin:6px 0;overflow:hidden;direction:ltr}.bar2 i{position:absolute;left:0;top:0;bottom:0;width:0;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}.bar2 .a{background:var(--g)}.bar2 .p{background:#cbd5e1;z-index:1;transition-delay:.2s}.go .bar2 .a{width:100%}.go .bar2 .p{width:var(--p)}.wrow small{color:var(--mut)}
+.opt{display:flex;gap:8px;flex-wrap:wrap}.opt button{flex:1;min-width:120px;font-size:.95rem}
 </style>
 </head>
 <body>
@@ -41,7 +42,7 @@ input[type=range]{width:100%;accent-color:var(--cy);height:40px;direction:ltr}
 <div class="top"><a href="index.html" data-a="← العودة إلى المتحف">← Back to the museum</a><button class="lg">العربية</button></div>
 <h1>RESCUE LAB</h1>
 <p class="lead" data-a="كل أثر صمت لسبب. تولَّي دور مهندس المهمة: نظّفي الألواح، وواجهي سرعة الضوء، واكتشفي ما حدث فعلًا.">Every relic went silent for a reason. Take over as mission engineer: clean the panels, beat the speed of light, and work out what really happened.</p>
-<div class="tabs"><button class="on" data-t="a" data-a="🧹 تنظيف الغبار">🧹 Dust Wipe</button><button data-t="b" data-a="🚙 قيادة عمياء">🚙 Drive Blind</button><button data-t="c" data-a="🔍 ماذا حدث؟">🔍 What Went Wrong?</button><button data-t="d" data-a="📊 ما بعد الضمان">📊 Beyond Warranty</button></div>
+<div class="tabs"><button class="on" data-t="a" data-a="🧹 تنظيف الغبار">🧹 Dust Wipe</button><button data-t="b" data-a="🚙 قيادة عمياء">🚙 Drive Blind</button><button data-t="c" data-a="🔍 ماذا حدث؟">🔍 What Went Wrong?</button><button data-t="d" data-a="📊 ما بعد الضمان">📊 Beyond Warranty</button><button data-t="e" data-a="🛠️ ابني أثرك">🛠️ Build Your Relic</button></div>
 
 <section class="sec on card" id="a">
  <h2 data-a="أنقذي طاقة المركبة">Save the lander's power</h2>
@@ -72,6 +73,13 @@ input[type=range]{width:100%;accent-color:var(--cy);height:40px;direction:ltr}
  <h2 data-a="They outlived their plan">They outlived their plan</h2>
  <p class="lead" data-a="NASA planned short missions, and the machines kept going. Grey: the plan. Colour: what they really did.">NASA planned short missions, and the machines kept going. Grey: the plan. Colour: what they really did.</p>
  <div id="wr"></div>
+</section>
+<section class="sec card" id="e">
+ <h2 data-a="Build your own relic">Build your own relic</h2>
+ <p class="lead" data-a="Pick a power source, a place and some protection, then launch and see how long your machine survives. (A simplified model based on real missions.)">Pick a power source, a place and some protection, then launch and see how long your machine survives. (A simplified model based on real missions.)</p>
+ <div id="bb"></div>
+ <button class="pr" id="bl" style="margin-top:14px"></button>
+ <div id="br"></div>
 </section>
 </main>
 <script>
@@ -134,7 +142,19 @@ function badge(title,sub){const c=document.createElement("canvas");c.width=c.hei
  x.fillStyle="#fff";x.font="800 90px sans-serif";x.fillText(title,540,610);x.fillStyle="#ff9a4d";x.font="54px sans-serif";x.fillText(sub,540,710);
  x.fillStyle="#9fb0cc";x.font="32px sans-serif";x.fillText("mohamedmahdy5060-collab.github.io/Nasa-space_relics",540,1000);
  c.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="space-relics-badge.png";a.click()})}
-function setL(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";document.querySelectorAll("[data-a]").forEach(e=>{e.textContent=lang==="ar"?e.dataset.a:e.dataset.e});document.querySelector(".lg").textContent=lang==="ar"?"English":"العربية";$("#ds").textContent=L("Start","ابدأ");dl();lab();rw();dq()}
+const BP={p:[["☀️ Solar","☀️ شمسي"],["☢️ RTG (nuclear)","☢️ مولّد نووي RTG"],["🔋 Battery only","🔋 بطارية فقط"]],l:[["🌕 Moon equator","🌕 خط استواء القمر"],["🔴 Mars equator","🔴 خط استواء المريخ"],["🧊 Mars pole","🧊 قطب المريخ"]],x:[["🧹 Dust wiper","🧹 ممسحة غبار"],["🔥 Heater","🔥 مدفأة"],["— None","— لا شيء"]]},BN=[["Power","الطاقة","p"],["Place","المكان","l"],["Protection","الحماية","x"]],sel=[0,1,2];
+function sim(p,l,x){
+ if(p===2)return{y:.02,c:["The battery ran out with nothing to recharge it.","نفدت البطارية ولا شيء يشحنها."],e:["Short-lived probes","المسابير قصيرة العمر"]};
+ if(p===1)return l===0?{y:8,c:["Nuclear heat kept it warm through every lunar night, until the program ended.","حرارة المصدر النووي أبقتها دافئة طوال الليالي القمرية حتى انتهى البرنامج."],e:["Apollo ALSEP (1969–77)","محطات ألسيب (1969–77)"]}:{y:14,c:["The nuclear power source does not care about dust or winter, so it keeps going far beyond the plan.","المصدر النووي لا يتأثر بالغبار ولا الشتاء، فتستمر أبعد بكثير من المخطط."],e:["Curiosity (since 2012)","كيوريوسيتي (منذ 2012)"]};
+ if(l===0)return x===1?{y:1,c:["The heater got it through some lunar nights, then the cold won.","عبرت المدفأة بها بعض الليالي القمرية ثم انتصر البرد."],e:["Lunar landers with heaters","مركبات قمرية بمدافئ"]}:{y:.04,c:["It froze in the first lunar night: about 14 days without Sun.","تجمّدت في أول ليلة قمرية: نحو 14 يومًا بلا شمس."],e:["Most early solar landers","معظم المركبات الشمسية المبكرة"]};
+ if(l===2)return{y:.5,c:["Polar winter darkness cut the Sun for months.","ظلام الشتاء القطبي حجب الشمس شهورًا."],e:["Phoenix (2008)","فينيكس (2008)"]};
+ return x===0?{y:8,c:["Your wiper (plus lucky wind) kept the panels clean for years, until parts wore out.","ممسحتك وحظ الرياح أبقت الألواح نظيفة سنوات حتى تآكلت القطع."],e:["Opportunity (~14 y), helped by wind","أوبورتيونيتي (~14 سنة) بمساعدة الرياح"]}:{y:3,c:["Dust slowly buried the solar panels.","دفن الغبار الألواح الشمسية ببطء."],e:["InSight (2018–22)","إنسايت (2018–22)"]}}
+function bb(){$("#bb").innerHTML=BN.map((n,k)=>`<p class="lead" style="margin:10px 0 4px"><b>${L(n[0],n[1])}</b></p><div class="opt">${BP[n[2]].map((o,i)=>`<button data-k="${k}" data-i="${i}" class="${sel[k]===i?"on":""}">${L(o[0],o[1])}</button>`).join("")}</div>`).join("");
+ $("#bb").querySelectorAll("button").forEach(b=>b.onclick=()=>{sel[+b.dataset.k]=+b.dataset.i;bb()});$("#bl").textContent=L("🚀 Launch","🚀 أطلقي")}
+$("#bl").onclick=()=>{const r=sim(...sel),d=r.y*365,t=d<365?L(`${Math.round(d)} days`,`${Math.round(d)} يومًا`):L(`${r.y} years`,`${r.y} سنة`),w=Math.min(100,Math.log10(d+1)/Math.log10(6000)*100),x=Math.round(d/90);
+ $("#br").innerHTML=`<h2 style="margin-top:18px">${L("Your relic lasted","عاشت مركبتك")} ~${t}</h2><div class="bar2"><i class="a"></i></div><p>${L(r.c[0],r.c[1])}</p><p class="lead">${L("Real-life twin:","التوأم الحقيقي:")} ${L(r.e[0],r.e[1])} · ${x>=1?"×"+x+" "+L("the 90-day plan","من خطة الـ90 يومًا"):L("shorter than a 90-day plan","أقصر من خطة الـ90 يومًا")}</p><button id="bg">📸 ${L("Save my badge","احفظي شارتي")}</button>`;
+ setTimeout(()=>{$("#br .a").style.width=w+"%"},60);$("#bg").onclick=()=>badge(L("Relic Designer","مصمم الآثار"),L(`Lasted ~${t}`,`عاشت ~${t}`))};
+function setL(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";document.querySelectorAll("[data-a]").forEach(e=>{e.textContent=lang==="ar"?e.dataset.a:e.dataset.e});document.querySelector(".lg").textContent=lang==="ar"?"English":"العربية";$("#ds").textContent=L("Start","ابدأ");dl();lab();rw();bb();dq()}
 document.querySelector(".lg").onclick=()=>{lang=lang==="ar"?"en":"ar";try{localStorage.sr_lang=lang}catch(e){}setL()};
 newMap();setL();
 </script>
