@@ -1,85 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Space Relics: an interactive museum and radio for the machines NASA left on the Moon and Mars.">
-<meta name="theme-color" content="#04060f">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%2790%27 font-size=%2790%27%3E🌕%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GHOST RADIO | Space Relics</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Space+Grotesk:wght@400;500;700&family=Tajawal:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;900&family=IBM+Plex+Sans:wght@400;600&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <style>
-.rw{max-width:760px;margin:auto;padding:26px 18px 90px}
-.back{color:var(--mut);text-decoration:none;font-size:.9rem}.back:hover{color:var(--cy)}
-h1.rt{font:800 clamp(2.4rem,9vw,4.4rem)/1 Orbitron,sans-serif;margin:10px 0 6px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
-.dev{margin-top:18px;padding:22px;border-radius:22px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px)}
-#fr{font:800 clamp(2.6rem,10vw,4rem)/1 Orbitron,sans-serif;text-align:center;color:var(--cy);text-shadow:0 0 30px #5ee7ff66}
-#fr small{font-size:1rem;color:var(--mut)}
-#osc{width:100%;height:130px;display:block;margin:12px 0;border-radius:14px;background:#02050c}
-#st{text-align:center;color:var(--mut);min-height:24px}
-.row{display:flex;gap:10px;align-items:center;margin-top:14px}
-.row input{flex:1;height:36px;accent-color:var(--cy)}
-.b{padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:#ffffff10;color:var(--ink);font-size:1rem}
-.b:hover{border-color:var(--cy);color:var(--cy)}
-#tx{min-height:190px;line-height:1.8}
-#tx h2{margin:0 0 6px;font:700 1.3rem Orbitron,sans-serif;color:var(--cy)}
-#tx .q{border-left:3px solid var(--cy);padding:10px 14px;background:#5ee7ff10;border-radius:0 12px 12px 0;min-height:70px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.chip{padding:6px 12px;border-radius:99px;font-size:.78rem;border:1px solid var(--line);color:var(--mut)}
-.chip.on{background:var(--cy);color:#04101a;font-weight:700;border-color:var(--cy)}
-.done{margin-top:18px;padding:20px;border-radius:18px;text-align:center;background:linear-gradient(120deg,#5ee7ff18,#a78bfa18,#ff9a4d18);border:1px solid var(--line)}
-#ov{position:fixed;inset:0;z-index:99;display:grid;place-items:center;text-align:center;padding:24px;background:#04060ff2}
-#ov p{color:var(--mut);max-width:360px}
+:root{--bg:#0d0906;--wood:#4a2b12;--wood2:#2f1a09;--panel:#2a1f14;--ink:#f1e5d0;--dim:#a2907a;--acc:#ff9a4d;--scr:#0a0704;--glow:#ffb347}
+@media(prefers-color-scheme:light){:root{--bg:#ece2d0;--wood:#7a4a24;--wood2:#5b3416;--panel:#d8c9a8;--ink:#2a1d12;--dim:#6b5a48;--acc:#a8420f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.7 'IBM Plex Sans',system-ui,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+[lang=ar] body,[lang=ar] button{font-family:Tajawal,system-ui,sans-serif}
+main{max-width:760px;margin:auto;padding:22px 16px 50px}
+h1{font:900 clamp(2.6rem,10vw,5rem)/1 Fraunces,Georgia,serif;letter-spacing:-.02em;margin:14px 0 8px}
+.lead{color:var(--dim);max-width:560px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.top a{color:var(--dim);text-decoration:none}
+.radio{margin:22px 0;background:linear-gradient(var(--wood),var(--wood2));border-radius:26px;padding:16px;box-shadow:0 12px 0 #0004}
+.face{background:var(--panel);border-radius:16px;padding:14px}
+.scr{background:repeating-linear-gradient(0deg,#ffb34710 0 1px,transparent 1px 4px),var(--scr);color:var(--glow);border-radius:10px;padding:14px;min-height:260px;text-shadow:0 0 8px #ffb34788;box-shadow:inset 0 0 40px #000e}
+canvas{width:100%;height:64px;display:block}
+#rn{font:600 1.25rem Fraunces,serif;min-height:1.6em}
+#rt{font:1.1rem/1.7 Georgia,serif;min-height:7em;margin:6px 0;transition:filter .25s}
+#rm{font-size:.85rem;color:#9b8a70}
+.scale{position:relative;margin-top:14px;height:46px;border-bottom:2px solid var(--dim);direction:ltr}
+.scale i{position:absolute;bottom:0;width:1px;height:10px;background:var(--dim)}.scale i.b{height:20px}
+.scale span{position:absolute;bottom:22px;transform:translateX(-50%);font-size:.7rem;color:var(--dim)}
+.scale u{position:absolute;bottom:0;width:7px;height:7px;border-radius:50%;background:var(--dim);transform:translateX(-50%);opacity:.6;text-decoration:none}
+.scale u.h{background:var(--glow);opacity:1}
+#needle{position:absolute;bottom:0;width:3px;height:46px;background:var(--acc);transform:translateX(-50%)}
+input[type=range]{width:100%;direction:ltr;accent-color:var(--acc);height:40px;margin-top:6px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px}
+button{font:inherit;font-weight:600;background:var(--acc);color:#1a0d00;border:0;border-radius:12px;padding:10px 18px;cursor:pointer;min-height:44px}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--dim)}
+.lamp{width:12px;height:12px;border-radius:50%;background:#5a3a1a}.lamp.on{background:var(--glow);box-shadow:0 0 12px var(--glow)}
+:focus-visible{outline:3px solid var(--glow);outline-offset:2px}
+.end{display:none;border:1px solid var(--acc);border-radius:14px;padding:18px;margin:10px 0}
+.end h2{font:700 1.5rem Fraunces,serif;color:var(--acc);margin:0 0 6px}
+.end input{width:100%;padding:10px;border-radius:10px;border:1px solid var(--dim);background:var(--bg);color:var(--ink);font:inherit;margin:8px 0}
+.prog,#log{color:var(--dim);font-size:.9rem}
 </style>
 </head>
 <body>
-<div id="ov"><div><div class="kick">SPACE RELICS · SIGNAL INTERCEPT</div><h1 class="rt">GHOST RADIO</h1><p>Eleven machines are still transmitting from the Moon and Mars. Turn the dial, catch their signal, and hear their stories.<br>🎧 Headphones recommended.</p><button class="btn" id="go" style="border:0;cursor:pointer">POWER ON</button></div></div>
-<main class="rw">
- <a class="back" href="index.html">← Back to the museum</a> <button class="lgb b" style="float:right;padding:6px 14px">العربية</button>
- <div class="kick" style="margin-top:14px">SPACE RELICS · SIGNAL INTERCEPT</div>
- <h1 class="rt">GHOST RADIO</h1>
- <div class="dev">
-  <div id="fr">98.0 <small>MHz</small></div>
-  <canvas id="osc"></canvas>
-  <div id="st">Static...</div>
-  <div class="row"><button class="b" id="dn">−</button><input type="range" id="sl" min="880" max="1080" value="980"><button class="b" id="up">+</button></div>
-  <div class="row" style="justify-content:space-between"><button class="b" id="hint">💡 Hint</button><span id="cnt" style="color:var(--mut)">0 / 11 signals</span></div>
+<main>
+<div class="top"><a href="index.html" id="bk"></a><button class="ghost lgb"></button></div>
+<h1>GHOST RADIO</h1>
+<p class="lead" id="ld"></p>
+<div class="radio"><div class="face">
+ <div class="scr">
+  <canvas id="wave" width="600" height="64" aria-hidden="true"></canvas>
+  <div id="rn" aria-live="polite"></div>
+  <div id="rt" aria-live="polite"></div>
+  <div id="rm"></div>
  </div>
- <div class="dev" id="tx"><span style="color:var(--mut)">Turn the dial slowly. Watch the wave calm down when a signal is near.</span></div>
- <div class="chips" id="ch"></div>
- <div id="end"></div>
+ <div class="scale" id="scale" aria-hidden="true"><div id="needle"></div></div>
+ <input id="dial" type="range" min="880" max="1080" value="880" aria-label="Tuning dial">
+ <div class="row"><span class="lamp" id="lamp"></span><button id="pw"></button><button class="ghost" id="vo" aria-pressed="true"></button><button class="ghost" id="hb"></button></div>
+</div></div>
+<div class="end" id="end" aria-live="polite">
+ <h2 id="eT"></h2><p id="eS"></p><p><b id="eC"></b></p>
+ <label for="msg" id="lbl"></label>
+ <input id="msg" maxlength="80">
+ <button id="go"></button>
+ <ul id="log"></ul>
+</div>
+<p class="prog" id="prog"></p>
+<p class="prog" id="ft"></p>
 </main>
 <script src="relics.js"></script>
 <script src="relics_ar.js"></script>
 <script>
-const $=s=>document.querySelector(s),found=new Set();let ctx,ng,hg,cur=-1,str=0,lock=false,tw;
-R.forEach((r,i)=>{const c=document.createElement("span");c.className="chip";c.id="c"+i;c.textContent="??? "+r.fr.toFixed(1);$("#ch").appendChild(c)});
-function audio(){ctx=new (window.AudioContext||window.webkitAudioContext)();const b=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
-const n=ctx.createBufferSource();n.buffer=b;n.loop=true;ng=ctx.createGain();ng.gain.value=.2;n.connect(ng).connect(ctx.destination);n.start();
-const o=ctx.createOscillator();o.frequency.value=196;hg=ctx.createGain();hg.gain.value=0;o.connect(hg).connect(ctx.destination);o.start()}
-function beep(){if(!ctx)return;const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=880;g.gain.setValueAtTime(.08,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.35);o.connect(g).connect(ctx.destination);o.start();o.stop(ctx.currentTime+.35)}
-function upd(){const f=$("#sl").value/10;$("#fr").innerHTML=f.toFixed(1)+" <small>MHz</small>";
-let bi=0,bd=99;R.forEach((r,i)=>{const d=Math.abs(f-r.fr);if(d<bd){bd=d;bi=i}});str=Math.max(0,1-bd/1.4);lock=bd<=.3;
-if(ng){ng.gain.value=lock?.015:.22*(1-str*.85);hg.gain.value=lock?.035:0}
-if(lock){$("#st").textContent=L("✅ Signal locked","✅ تم التقاط الإشارة");if(cur!==bi){cur=bi;beep();show(R[bi],bi)}}
-else{cur=-1;$("#st").textContent=str>.6?L("Strong signal nearby... fine tune","إشارة قوية قريبة... اضبط بدقة"):str>.25?L("A faint voice in the static...","صوت خافت وسط التشويش..."):L("Static...","تشويش...")}}
-function show(r0,i){const r=T(r0);$("#tx").innerHTML=`<h2>${r.e} ${r.n}</h2><div class="kick">${r.w.toUpperCase()} · ${r.y}</div>${fig(i)}<p class="q" id="qq"></p><p>${r.s}</p><button class="b" id="say">${L("🔊 Listen","🔊 استمع")}</button> <a class="b" href="index.html#archive" style="text-decoration:none;display:inline-block">${L("🏛️ See in museum","🏛️ شاهدها في المتحف")}</a>`;
-const t='"'+r.q+'"';let k=0;clearInterval(tw);tw=setInterval(()=>{$("#qq").textContent=t.slice(0,++k);if(k>=t.length)clearInterval(tw)},30);
-$("#say").onclick=()=>{const s=speechSynthesis;if(s.speaking){s.cancel();return}const u=new SpeechSynthesisUtterance(r.q+" "+r.s);u.lang=L("en-US","ar");u.rate=.95;s.speak(u)};
-found.add(i);try{localStorage.sr_found=JSON.stringify([...found])}catch(e){}const c=$("#c"+i);c.classList.add("on");c.textContent=r.n;$("#cnt").textContent=found.size+" / "+R.length+L(" signals"," إشارة");
-if(found.size===R.length)$("#end").innerHTML='<div class="done"><b>'+L("🌌 All signals recovered.","🌌 استعدنا كل الإشارات.")+'</b><br>'+L("Nothing here was truly forgotten.","لا شيء هنا نُسي حقًا.")+'<br><a class="btn" href="index.html#game" style="margin-top:14px">'+L("PLAY THE FINAL MISSION","العب المهمة الأخيرة")+'</a></div>'}
-$("#sl").oninput=upd;$("#up").onclick=()=>{$("#sl").value=+$("#sl").value+1;upd()};$("#dn").onclick=()=>{$("#sl").value=+$("#sl").value-1;upd()};
-$("#hint").onclick=()=>{const f=$("#sl").value/10,left=R.filter((r,i)=>!found.has(i));if(!left.length){$("#st").textContent=L("All signals collected 🎉","جمعت كل الإشارات 🎉");return}
-const n=left.reduce((a,b)=>Math.abs(b.fr-f)<Math.abs(a.fr-f)?b:a);$("#st").textContent=n.fr>f?L("💡 Try a higher frequency ▲","💡 جرّب تردّدًا أعلى ▲"):L("💡 Try a lower frequency ▼","💡 جرّب تردّدًا أقل ▼")};
-if(location.hash.length>1&&R[+location.hash.slice(1)])$("#sl").value=Math.round(R[+location.hash.slice(1)].fr*10);
-HEARD.forEach(i=>{if(R[i]){found.add(i);const c=$("#c"+i);c.classList.add("on");c.textContent=R[i].n}});$("#cnt").textContent=found.size+" / "+R.length+L(" signals"," إشارة");
-window.onLang=()=>{tr([["#ov p",["ما زالت إحدى عشرة آلة تبث من القمر والمريخ. أدر المؤشر والتقط إشاراتها واستمع إلى قصصها.<br>🎧 يُفضّل استخدام سماعات."]],["#go",["تشغيل"]],["#hint",["💡 تلميح"]],[".back",["← العودة إلى المتحف"]]]);$("#cnt").textContent=found.size+" / "+R.length+L(" signals"," إشارة");upd()};
-$("#go").onclick=()=>{audio();$("#ov").style.display="none";upd()};
-const cv=$("#osc"),x=cv.getContext("2d");
-(function L(t){const w=cv.width=cv.clientWidth*devicePixelRatio,h=cv.height=130*devicePixelRatio,m=h/2;x.clearRect(0,0,w,h);x.lineWidth=2*devicePixelRatio;x.strokeStyle=lock?"#ff9a4d":"#5ee7ff";x.shadowColor=x.strokeStyle;x.shadowBlur=12;x.beginPath();
-for(let i=0;i<w;i+=3){const sine=Math.sin(i*.02/devicePixelRatio+t*.006)*(.25+.55*str)*m*.8,noise=(Math.random()-.5)*m*1.5*(1-str)*(lock?.1:1);x.lineTo(i,m+sine*(lock?1.2:1)+noise)}
-x.stroke();requestAnimationFrame(L)})(0);
+const $=id=>document.getElementById(id),N=R.length;
+const LAST={2:"1977-09-30",5:"1997-09-27",6:"2010-03-22",7:"2018-06-10",8:"2008-11-02",9:"2022-12-15",10:"2024-01-18"};
+let ac,ng,on=false,voice=true,sig=0,cs=-1,ix=0,tm=null,dead=false;const heard=new Set(HEARD);
+function audio(){ac=new(window.AudioContext||window.webkitAudioContext)();const n=ac.sampleRate*2,b=ac.createBuffer(1,n,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;
+ const s=ac.createBufferSource();s.buffer=b;s.loop=true;const f=ac.createBiquadFilter();f.type="bandpass";f.frequency.value=2200;f.Q.value=.4;ng=ac.createGain();ng.gain.value=.2;s.connect(f).connect(ng).connect(ac.destination);s.start()}
+const lines=i=>{const x=T(R[i]);return[x.q,...(x.s.match(/[^.]+\.?/g)||[]).slice(0,3).map(t=>t.trim())]};
+function cor(t,p){const g="░▒▓#%?";let o="";for(const c of t)o+=(c!==" "&&Math.random()<p)?g[Math.random()*g.length|0]:c;return o}
+function tts(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=L("en-US","ar-SA");u.rate=.85;u.pitch=.8;u.volume=Math.min(1,sig);speechSynthesis.speak(u)}
+function say(t){if(!voice||sig<.5||cs<0)return;try{speechSynthesis.cancel()}catch(e){}if(window._a)_a.pause();
+ if(lang!=="en"){tts(t);return}
+ const key=R[cs].n.split(" ")[0].toLowerCase().replace(/[^a-z0-9]+/g,"-");let done=0;const fb=()=>{if(!done){done=1;tts(t)}};
+ const a=new Audio("audio/"+key+"-"+(ix+1)+".mp3");a.volume=Math.min(1,sig);window._a=a;a.onerror=fb;a.play().catch(fb)}
+const sc=$("scale");for(let f=880;f<=1080;f+=10){const i=document.createElement("i");i.style.left=((f-880)/2)+"%";if(f%50===0){i.className="b";const s=document.createElement("span");s.style.left=i.style.left;s.textContent=f/10;sc.appendChild(s)}sc.appendChild(i)}
+R.forEach((r,i)=>{const u=document.createElement("u");u.id="d"+i;u.style.left=((r.fr*10-880)/2)+"%";sc.appendChild(u)});
+function mark(){R.forEach((r,i)=>$("d"+i).className=heard.has(i)?"h":"")}
+function tune(){
+ const f=+$("dial").value;$("needle").style.left=((f-880)/2)+"%";
+ if(!on){$("rn").textContent=L("No signal","لا توجد إشارة");$("rt").textContent=L("Press Power on, then turn the dial slowly.","اضغط تشغيل ثم حرّك المؤشر ببطء.");$("rm").textContent=(f/10).toFixed(1)+" MHz";return}
+ let b=-1,bd=1e9;R.forEach((r,i)=>{const d=Math.abs(r.fr*10-f);if(d<bd){bd=d;b=i}});
+ sig=dead?0:Math.max(0,1-bd/10);if(window._a)_a.volume=Math.min(1,sig);
+ if(ac)ng.gain.setTargetAtTime(dead?0:.02+(1-sig)*.25,ac.currentTime,.05);
+ if(dead)return;
+ if(sig>.3){
+  if(cs!==b){cs=b;ix=0;$("end").style.display="none";clearInterval(tm);tm=setInterval(adv,6500);say(lines(b)[0])}
+  const x=T(R[b]),ls=lines(b);$("rn").textContent=x.e+" "+x.n;$("rt").style.filter=`blur(${((1-sig)*1.4).toFixed(1)}px)`;
+  $("rt").textContent=cor(ls[ix],Math.min(.95,(1-sig)*1.1+ix/(ls.length-1)*.25));
+  $("rm").textContent=(f/10).toFixed(1)+" MHz · "+L("signal","الإشارة")+" "+Math.round(sig*100)+"%";
+ }else{
+  if(cs>=0){try{speechSynthesis.cancel()}catch(e){}window._a&&_a.pause()}
+  cs=-1;clearInterval(tm);$("rt").style.filter="none";$("rn").textContent=L("No signal","لا توجد إشارة");$("rt").textContent=cor("kshhh fzzzt krrr",.2);$("rm").textContent=(f/10).toFixed(1)+" MHz";
+ }
+}
+function adv(){
+ if(cs<0)return;const i=cs,ls=lines(i);
+ if(ix<ls.length-1){ix++;say(ls[ix]);return}
+ clearInterval(tm);
+ setTimeout(()=>{if(cs!==i)return;dead=true;try{speechSynthesis.cancel()}catch(e){}$("rn").textContent="";$("rt").textContent="";$("rm").textContent="";
+  setTimeout(()=>{dead=false;heard.add(i);try{localStorage.sr_found=JSON.stringify([...heard])}catch(e){}mark();ui();const x=T(R[i]);
+   $("eT").textContent=x.e+" "+x.g;$("eS").textContent=x.f.join(" · ");
+   if(LAST[i]){const c=()=>{let t=Math.floor((Date.now()-new Date(LAST[i]+"T00:00:00Z"))/1000);const y=Math.floor(t/31557600);t-=y*31557600;const d=Math.floor(t/86400);t-=d*86400;const h=Math.floor(t/3600);$("eC").textContent=L(`Silent for ${y} years, ${d} days, ${h} hours`,`صامتة منذ ${y} سنة و${d} يومًا و${h} ساعة`)};c()}else $("eC").textContent="";
+   $("end").style.display="block";$("end").scrollIntoView({behavior:"smooth",block:"nearest"});$("rn").textContent="";$("rt").textContent="…"+x.n+L(" has gone quiet."," صمتت.");cs=-1},3200)},2200)}
+$("pw").onclick=()=>{if(!ac)audio();on=!on;$("lamp").classList.toggle("on",on);on?ac.resume():ac.suspend();if(!on){try{speechSynthesis.cancel()}catch(e){}clearInterval(tm);cs=-1}ui()};
+$("vo").onclick=()=>{voice=!voice;if(!voice){try{speechSynthesis.cancel()}catch(e){}}ui()};
+$("hb").onclick=()=>{const f=$("dial").value/10,left=R.filter((r,i)=>!heard.has(i));if(!left.length){$("rm").textContent=L("You heard them all 🎉","سمعتها كلها 🎉");return}
+ const n=left.reduce((a,b)=>Math.abs(b.fr-f)<Math.abs(a.fr-f)?b:a);$("rm").textContent=n.fr>f?L("💡 Try a higher frequency ▲","💡 جرّب تردّدًا أعلى ▲"):L("💡 Try a lower frequency ▼","💡 جرّب تردّدًا أقل ▼")};
+$("dial").oninput=tune;setInterval(tune,300);
+$("go").onclick=()=>{const v=$("msg").value.trim();if(!v)return;const li=document.createElement("li");li.textContent=L("Sent: “","أُرسلت: «")+v+L("”","»");$("log").prepend(li);$("msg").value=""};
+function ui(){$("bk").textContent=L("← Back to the museum","← العودة إلى المتحف");
+ $("ld").textContent=L(`${N} machines on the Moon and Mars are fading out. Some still work, some went silent. Turn the dial slowly, hold a frequency, and hear their story break up.`,`${N} آلة على القمر والمريخ تخفت. بعضها ما زال يعمل وبعضها صمت. حرّك المؤشر ببطء وثبّت التردد واستمع إلى قصتها وهي تتلاشى.`);
+ $("pw").textContent=on?L("Power off","إيقاف"):L("Power on","تشغيل");$("vo").textContent=L("Voice: ","الصوت: ")+(voice?L("on","يعمل"):L("off","مغلق"));$("vo").setAttribute("aria-pressed",voice);$("hb").textContent=L("💡 Hint","💡 تلميح");
+ $("lbl").textContent=L("Send a signal back. Nobody will answer, but it will be sent.","أرسل إشارة. لن يرد أحد، لكنها ستُرسل.");$("msg").placeholder=L("Write a short message","اكتب رسالة قصيرة");$("go").textContent=L("Send signal","إرسال");
+ $("prog").textContent=L("Relics heard: ","آثار سمعتها: ")+heard.size+" / "+N+(heard.size===N?L("  ·  You heard them all."," · سمعتها كلها."):"");
+ $("ft").textContent=L("Spoken lines are creative first-person retellings, not real recordings. Dates are based on NASA/JPL material.","الجمل المنطوقة إعادة سرد إبداعية وليست تسجيلات حقيقية. التواريخ مبنية على مواد ناسا ومختبر الدفع النفاث.");tune()}
+window.onLang=ui;mark();
+(function w(t){const c=$("wave"),x=c.getContext("2d");x.clearRect(0,0,600,64);x.strokeStyle="#ffb347";x.lineWidth=2;x.beginPath();const q=dead||!on;
+ for(let i=0;i<600;i+=3){const y=32+(Math.random()-.5)*(q?2:(1-sig)*55+4)+(q?0:Math.sin(i*.04+t*.008)*sig*20);i?x.lineTo(i,y):x.moveTo(i,y)}x.stroke();requestAnimationFrame(w)})(0);
 setLang(lang);
 </script>
 </body>
