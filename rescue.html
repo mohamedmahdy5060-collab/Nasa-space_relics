@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RESCUE LAB | Space Relics</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Space+Grotesk:wght@400;500;700&family=Tajawal:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#04060f;--ink:#f1f5ff;--mut:#9fb0cc;--cy:#5ee7ff;--vi:#a78bfa;--or:#ff9a4d;--line:#ffffff1c;--g:linear-gradient(110deg,#5ee7ff,#a78bfa 55%,#ff9a4d)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(60vw 50vh at 10% 0,#1d3a7a66,transparent),radial-gradient(50vw 50vh at 95% 30%,#5b2a9a55,transparent),var(--bg);color:var(--ink);font:400 1.05rem/1.65 "Space Grotesk",system-ui,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+[lang=ar] body,[lang=ar] button{font-family:Tajawal,system-ui,sans-serif}
+main{max-width:760px;margin:auto;padding:22px 16px 60px}
+.top{display:flex;justify-content:space-between;align-items:center}.top a{color:var(--mut);text-decoration:none}
+h1{font:800 clamp(2.2rem,9vw,4rem)/1.05 Orbitron,sans-serif;margin:14px 0 8px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+[lang=ar] h1{font-family:Tajawal,sans-serif}
+.lead{color:var(--mut)}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}
+button{font:inherit;font-weight:600;cursor:pointer;min-height:44px;border-radius:12px;padding:10px 16px;border:1px solid var(--line);background:#ffffff10;color:var(--ink)}
+button:disabled{opacity:.5;cursor:default}
+button.on,button.pr{background:var(--cy);color:#04101a;border-color:var(--cy)}
+.card{padding:20px;border-radius:20px;background:#ffffff0a;border:1px solid var(--line);margin-top:8px}
+.card h2{margin:0 0 6px;font-size:1.25rem;color:var(--cy)}
+.sec{display:none}.sec.on{display:block}
+.wrap{position:relative;width:100%;max-width:360px;aspect-ratio:360/220;margin:12px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.wrap canvas{position:absolute;inset:0;width:100%;height:100%}#dd{touch-action:none;cursor:crosshair}
+.bar{height:12px;border-radius:9px;background:#ffffff14;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;width:0;background:var(--g);transition:width .15s}
+.msg{min-height:3em;margin-top:8px}
+input[type=range]{width:100%;accent-color:var(--cy);height:40px;direction:ltr}
+.pad{display:flex;gap:8px;margin:10px 0}.pad button{flex:1;font-size:1.3rem}#gc{width:100%;max-width:360px;display:block;border-radius:14px;border:1px solid var(--line);margin:12px 0}
+.lane{position:relative;height:34px;margin:12px 0;border-radius:99px;background:#ffffff12;direction:ltr}
+.lane b{position:absolute;top:50%;translate:0 -50%;font-size:1.4rem}.lane #pk{left:0;transition:left 6s linear}
+.op{display:block;width:100%;text-align:start;margin-top:10px}
+.op.ok{background:#3ddc9755;border-color:#3ddc97}.op.no{background:#ff4d6d44;border-color:#ff4d6d}
+.tel{font-family:monospace;color:var(--or);background:#00000055;padding:10px 12px;border-radius:10px}
+.wrow{margin:16px 0}.wrow b{font-size:1.05rem}.wrow em{float:right;font:800 1.3rem Orbitron,sans-serif;color:var(--or);font-style:normal}[dir=rtl] .wrow em{float:left}.bar2{position:relative;height:16px;border-radius:9px;background:#ffffff10;margin:6px 0;overflow:hidden;direction:ltr}.bar2 i{position:absolute;left:0;top:0;bottom:0;width:0;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}.bar2 .a{background:var(--g)}.bar2 .p{background:#cbd5e1;z-index:1;transition-delay:.2s}.go .bar2 .a{width:100%}.go .bar2 .p{width:var(--p)}.wrow small{color:var(--mut)}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="index.html" data-a="← العودة إلى المتحف">← Back to the museum</a><button class="lg">العربية</button></div>
+<h1>RESCUE LAB</h1>
+<p class="lead" data-a="كل أثر صمت لسبب. تولَّي دور مهندس المهمة: نظّفي الألواح، وواجهي سرعة الضوء، واكتشفي ما حدث فعلًا.">Every relic went silent for a reason. Take over as mission engineer: clean the panels, beat the speed of light, and work out what really happened.</p>
+<div class="tabs"><button class="on" data-t="a" data-a="🧹 تنظيف الغبار">🧹 Dust Wipe</button><button data-t="b" data-a="🚙 قيادة عمياء">🚙 Drive Blind</button><button data-t="c" data-a="🔍 ماذا حدث؟">🔍 What Went Wrong?</button><button data-t="d" data-a="📊 ما بعد الضمان">📊 Beyond Warranty</button></div>
+
+<section class="sec on card" id="a">
+ <h2 data-a="أنقذي طاقة المركبة">Save the lander's power</h2>
+ <p class="lead" data-a="الغبار يدفن الألواح الشمسية. اسحبي إصبعك أو الفأرة فوق الغبار لمسحه. انتبهي: هبّة رياح ستدفن نصف اللوح من جديد.">Dust is burying the solar panels. Drag your finger or mouse over the dust to wipe it off. Watch out: a wind gust will bury half of it again.</p>
+ <div class="wrap"><canvas id="pc" width="360" height="220"></canvas><canvas id="dd" width="360" height="220"></canvas></div>
+ <div>⚡ <span data-a="نظافة الألواح">Panel clean</span> <b id="pw">0%</b></div><div class="bar"><i id="pwb"></i></div>
+ <div>🔋 <span data-a="البطارية">Battery</span> <b id="bt">50%</b> · ⏱ <b id="tm">30</b>s</div><div class="bar"><i id="btb"></i></div>
+ <button class="pr" id="ds" data-a="ابدئي">Start</button>
+ <p class="msg" id="dm2"></p>
+</section>
+
+<section class="sec card" id="b">
+ <h2 data-a="Drive a rover blind">Drive a rover blind</h2>
+ <p class="lead" data-a="Commands take minutes to reach Mars, so you must plan the whole route and send it at once. Reach 🏁 without hitting a rock 🪨. Then turn on AutoNav, the real solution engineers built.">Commands take minutes to reach Mars, so you must plan the whole route and send it at once. Reach 🏁 without hitting a rock 🪨. Then turn on AutoNav, the real solution engineers built.</p>
+ <input type="range" id="km" min="55" max="400" value="225"><div>🔴 <b id="kv"></b></div>
+ <canvas id="gc" width="360" height="200"></canvas>
+ <div class="pad"><button data-m="U">⬆</button><button data-m="L">⬅</button><button data-m="D">⬇</button><button data-m="R">➡</button><button id="clr">⌫</button></div>
+ <div class="tel" id="qq"></div>
+ <div class="row"><button class="pr" id="sd"></button><button id="an"></button><button id="ng"></button></div>
+ <p class="msg" id="sm"></p>
+</section>
+
+<section class="sec card" id="c">
+ <h2 data-a="اقرأي بيانات القياس. اعثري على السبب.">Read the telemetry. Find the cause.</h2>
+ <div id="q"></div>
+</section>
+<section class="sec card" id="d">
+ <h2 data-a="They outlived their plan">They outlived their plan</h2>
+ <p class="lead" data-a="NASA planned short missions, and the machines kept going. Grey: the plan. Colour: what they really did.">NASA planned short missions, and the machines kept going. Grey: the plan. Colour: what they really did.</p>
+ <div id="wr"></div>
+</section>
+</main>
+<script>
+const $=s=>document.querySelector(s);let lang="en";try{lang=localStorage.sr_lang||"en"}catch(e){}
+const L=(e,a)=>lang==="ar"?a:e;
+document.querySelectorAll("[data-a]").forEach(e=>e.dataset.e=e.textContent);
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.querySelectorAll(".sec").forEach(s=>s.classList.toggle("on",s.id===b.dataset.t));if(b.dataset.t==="d"){const w=$("#wr");w.classList.remove("go");void w.offsetWidth;setTimeout(()=>w.classList.add("go"),60)}});
+// ---- Dust wipe
+const W=360,H=220,GX=24,GY=14,dc=$("#dd"),dd=dc.getContext("2d"),pc=$("#pc").getContext("2d");let cl=[],bat=50,tt=0,run=false,iv,gst=false;
+pc.fillStyle="#12264d";pc.fillRect(0,0,W,H);pc.strokeStyle="#5ee7ff66";for(let x=0;x<=W;x+=60){pc.beginPath();pc.moveTo(x,0);pc.lineTo(x,H);pc.stroke()}for(let y=0;y<=H;y+=55){pc.beginPath();pc.moveTo(0,y);pc.lineTo(W,y);pc.stroke()}
+function dust(x0){dd.globalCompositeOperation="source-over";dd.fillStyle="rgba(170,92,52,.96)";dd.fillRect(x0,0,W-x0,H);for(let i=0;i<GX*GY;i++)if((i%GX)*W/GX>=x0)cl[i]=0}
+function wipe(e){if(!run)return;const r=dc.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;dd.globalCompositeOperation="destination-out";dd.beginPath();dd.arc(x,y,17,0,7);dd.fill();
+ for(let gy=0;gy<GY;gy++)for(let gx=0;gx<GX;gx++){const cx=(gx+.5)*W/GX,cy=(gy+.5)*H/GY;if((cx-x)**2+(cy-y)**2<289)cl[gy*GX+gx]=1}}
+dc.onpointermove=wipe;dc.onpointerdown=e=>{dc.setPointerCapture(e.pointerId);wipe(e)};
+function gauge(p){$("#pw").textContent=p+"%";$("#pwb").style.width=p+"%";$("#bt").textContent=Math.max(0,bat|0)+"%";$("#btb").style.width=Math.max(0,Math.min(100,bat))+"%";$("#tm").textContent=Math.max(0,30-tt|0)}
+function endD(w,t){run=false;clearInterval(iv);$("#dm2").textContent=w?L("⚡ Power restored! On Mars, wind gusts sometimes cleaned Spirit and Opportunity's panels for free. InSight was not that lucky.","⚡ عادت الطاقة! على المريخ كانت الرياح تنظّف ألواح سبيريت وأوبورتيونيتي أحيانًا مجانًا. أما إنسايت فلم تحظَ بذلك."):t?L("⏱ Time's up! Wipe faster: the battery did not fill in time.","⏱ انتهى الوقت! امسحي أسرع، فلم تمتلئ البطارية في الوقت."):L("🪫 Battery dead. This is how InSight slowly lost power: dust buried its panels and it could not wipe itself.","🪫 نفدت البطارية. هكذا فقدت إنسايت طاقتها ببطء: دفنها الغبار ولم تستطع تنظيف نفسها.");$("#ds").textContent=L("Try again","حاول مجددًا")}
+$("#ds").onclick=()=>{cl=new Array(GX*GY).fill(0);bat=50;tt=0;run=true;gst=false;dust(0);$("#dm2").textContent="";clearInterval(iv);
+ iv=setInterval(()=>{tt+=.1;const p=Math.round(cl.reduce((a,b)=>a+b,0)/cl.length*100);bat+=(p*.09-2)*.1;if(tt>9&&!gst){gst=true;dust(W/2)}gauge(p);if(bat>=100)endD(true);else if(bat<=0)endD(false);else if(tt>=30)endD(false,1)},100)};
+// ---- Signal delay
+function dl(){const m=$("#km").value*1e6/299792/60;$("#kv").textContent=L(`${$("#km").value} million km · one-way ${m.toFixed(1)} min`,`${$("#km").value} مليون كم · في اتجاه واحد ${m.toFixed(1)} دقيقة`);return m}
+$("#km").oninput=dl;dl();
+const gc=$("#gc"),g=gc.getContext("2d"),CW=40,GW=9,GH=5,dirs={U:[0,-1],D:[0,1],L:[-1,0],R:[1,0]},AR={U:"⬆",D:"⬇",L:"⬅",R:"➡"},key=(x,y)=>x+","+y,sm=t=>$("#sm").textContent=t;
+let rocks,rv,fl,q=[],auto=false,busy=false;
+function path(f,t,rk){const Q=[[f,[]]],seen=new Set([key(...f)]);while(Q.length){const[[x,y],p]=Q.shift();if(x===t[0]&&y===t[1])return p;for(const m in dirs){const nx=x+dirs[m][0],ny=y+dirs[m][1];if(nx<0||ny<0||nx>=GW||ny>=GH||rk.has(key(nx,ny))||seen.has(key(nx,ny)))continue;seen.add(key(nx,ny));Q.push([[nx,ny],[...p,m]])}}return null}
+function draw(boom){g.fillStyle="#2a1810";g.fillRect(0,0,360,200);g.strokeStyle="#ffffff14";for(let i=0;i<=GW;i++){g.beginPath();g.moveTo(i*CW,0);g.lineTo(i*CW,200);g.stroke()}for(let j=0;j<=GH;j++){g.beginPath();g.moveTo(0,j*CW);g.lineTo(360,j*CW);g.stroke()}
+ g.font="28px serif";g.textAlign="center";g.textBaseline="middle";const t=(e,x,y)=>g.fillText(e,x*CW+20,y*CW+21);rocks.forEach(k=>{const[a,b]=k.split(",");t("🪨",+a,+b)});t("🏁",fl[0],fl[1]);t(boom?"💥":"🤖",rv[0],rv[1])}
+function qs(){$("#qq").textContent=auto?L("AutoNav: just send the goal 🏁","الملاحة الذاتية: أرسلي الهدف 🏁 فقط"):(q.map(m=>AR[m]).join(" ")||"…")}
+function lab(){$("#an").textContent=auto?L("🤖 AutoNav: ON","🤖 الملاحة الذاتية: تعمل"):L("🤖 AutoNav: off","🤖 الملاحة الذاتية: مغلقة");$("#ng").textContent=L("🔄 New map","🔄 خريطة جديدة");$("#sd").textContent=L("📡 Send","📡 إرسال");qs()}
+function newMap(){do{fl=[8,Math.random()*GH|0];rocks=new Set();while(rocks.size<9)rocks.add(key(1+Math.random()*7|0,Math.random()*GH|0))}while(!path([0,2],fl,rocks));rv=[0,2];q=[];busy=false;draw();lab();sm(L("Plan your moves with the arrows, then press Send.","خططي لحركاتك بالأسهم ثم اضغطي إرسال."))}
+document.querySelectorAll(".pad [data-m]").forEach(b=>b.onclick=()=>{if(busy||auto||q.length>=16)return;q.push(b.dataset.m);qs()});
+$("#clr").onclick=()=>{if(!busy){q.pop();qs()}};$("#ng").onclick=newMap;
+$("#an").onclick=()=>{if(busy)return;auto=!auto;q=[];lab();sm(auto?L("AutoNav on: the rover will find its own way around rocks. You only send the goal.","الملاحة الذاتية تعمل: ستجد المركبة طريقها بنفسها حول الصخور. أنتِ ترسلين الهدف فقط."):L("AutoNav off: you plan every step yourself.","الملاحة الذاتية مغلقة: أنتِ تخططين كل خطوة."))};
+$("#sd").onclick=()=>{if(busy)return;const m=dl(),cmds=auto?path(rv,fl,rocks):q.slice();if(!cmds||!cmds.length){sm(L("Add some moves first.","أضيفي بعض الحركات أولًا."));return}
+ busy=true;sm(L(`📡 Command in flight… (real delay ${m.toFixed(1)} min, shortened here)`,`📡 الأمر في الطريق… (التأخر الحقيقي ${m.toFixed(1)} دقيقة، اختُصر هنا)`));
+ setTimeout(()=>exec(cmds),1000+m/22*3000)};
+function exec(cmds){let i=0;const t=setInterval(()=>{
+ if(i>=cmds.length){clearInterval(t);busy=false;q=[];qs();sm(L("🛑 Out of commands before reaching 🏁. You must send again and wait for the delay again!","🛑 انتهت الأوامر قبل الوصول إلى 🏁. عليك الإرسال مجددًا وانتظار التأخر مرة أخرى!"));return}
+ const d=dirs[cmds[i++]],nx=rv[0]+d[0],ny=rv[1]+d[1];if(nx<0||ny<0||nx>=GW||ny>=GH)return;rv=[nx,ny];draw();
+ if(rocks.has(key(nx,ny))){clearInterval(t);busy=false;q=[];draw(true);qs();sm(L("💥 Crash! By the time you could see the rock, the rover had already hit it. Try again, or switch on AutoNav.","💥 اصطدام! حين كان يمكنك رؤية الصخرة كانت المركبة قد اصطدمت بها. حاولي مجددًا أو شغّلي الملاحة الذاتية."));return}
+ if(nx===fl[0]&&ny===fl[1]){clearInterval(t);busy=false;q=[];qs();sm(auto?L("🎉 One command, zero crashes. This is AutoNav: Perseverance and Curiosity use it to pick safe paths on their own, because Earth is minutes away.","🎉 أمر واحد ولا اصطدام. هذه هي الملاحة الذاتية: تستخدمها مركبتا برسيفرنس وكيوريوسيتي لاختيار طرق آمنة بنفسيهما، لأن الأرض تبعد دقائق."):L("🎉 You made it blind! Now press 🔄 and try AutoNav to see how real rovers solve this.","🎉 وصلتِ وأنتِ مغمضة! اضغطي 🔄 ثم جرّبي الملاحة الذاتية لترَي كيف تحل المركبات الحقيقية هذه المشكلة."))}},350)}
+// ---- Diagnose
+const D=[
+{n:"Spirit",t:["POWER 14% · TEMP -40°C · WHEELS: STUCK in sand · SUN: low (winter)","الطاقة 14% · الحرارة -40° · العجلات: عالقة في الرمل · الشمس: منخفضة (شتاء)"],o:[["Battery exploded","انفجرت البطارية"],["Stuck in sand, too little winter sun to stay warm","عالقة في الرمل ولا شمس كافية في الشتاء للتدفئة"],["Antenna broke off","انكسر الهوائي"]],c:1,w:["Spirit got stuck in 2009 and could not tilt its panels toward the winter Sun. Last contact: March 2010.","علقت سبيريت عام 2009 ولم تستطع إمالة ألواحها نحو شمس الشتاء. آخر اتصال: مارس 2010."]},
+{n:"Opportunity",t:["POWER 0% · SKY: opacity extreme · LAST PING: June 2018","الطاقة 0% · السماء: معتمة جدًا · آخر إشارة: يونيو 2018"],o:[["Planet-wide dust storm blocked the Sun","عاصفة غبار عالمية حجبت الشمس"],["Ran out of fuel","نفد الوقود"],["Wheels broke","تحطمت العجلات"]],c:0,w:["It runs on solar panels, so a global dust storm cut its power. NASA ended the mission in 2019.","تعمل بالألواح الشمسية، فقطعت العاصفة العالمية طاقتها. أنهت ناسا المهمة عام 2019."]},
+{n:"InSight",t:["POWER: falling for months · PANELS: low output · SEISMOMETER: off","الطاقة: تنخفض منذ شهور · الألواح: إنتاج ضعيف · مقياس الزلازل: مطفأ"],o:[["Meteor hit","اصطدام نيزك"],["Fuel ran out","نفد الوقود"],["Dust slowly covered its solar panels","غطى الغبار ألواحه الشمسية ببطء"]],c:2,w:["Dust built up on the panels until power was gone. NASA retired it in 2022.","تراكم الغبار على الألواح حتى انتهت الطاقة. أحالتها ناسا للتقاعد عام 2022."]},
+{n:"Phoenix",t:["LOCATION: Martian Arctic · SUN: setting · TEMP: dropping","الموقع: القطب الشمالي للمريخ · الشمس: تغيب · الحرارة: تنخفض"],o:[["Software bug","خلل برمجي"],["Dust storm","عاصفة غبار"],["Polar winter darkness cut its power","ظلام الشتاء القطبي قطع طاقتها"]],c:2,w:["Phoenix was built for a short summer mission. Winter darkness ended it in 2008.","بُنيت فينيكس لمهمة صيفية قصيرة. أنهى ظلام الشتاء مهمتها عام 2008."]},
+{n:"Ingenuity",t:["FLIGHT 72 · LANDING: rough · ROTOR: vibration abnormal","الرحلة 72 · الهبوط: خشن · الدوّار: اهتزاز غير طبيعي"],o:[["Rotor blade damaged in landing","تضرر ريشة الدوّار أثناء الهبوط"],["Battery dead","البطارية فارغة"],["Lost its signal","فقدت الإشارة"]],c:0,w:["After 72 flights, a damaged rotor blade ended its flying days in January 2024.","بعد 72 رحلة أنهى تلف الريشة أيام طيرانها في يناير 2024."]}];
+let ci=0;const res=[];
+function dq(){const q=$("#q");
+ if(ci>=D.length){const sc=res.filter((r,i)=>r===D[i].c).length;q.innerHTML=`<h2>${L("Chief Engineer score","درجة كبير المهندسين")}: ${sc}/${D.length}</h2><p class="lead">${sc>=4?L("Mission-control level. Every relic would trust you.","بمستوى مركز التحكم. كل الآثار تثق بك."):L("Good start. Try again and read the clues.","بداية جيدة. أعد المحاولة وانتبه للدلائل.")}</p><button class="pr" id="rd">📻 ${L("Hear their last words","استمع لآخر كلماتهم")}</button> <button id="rs">${L("Again","من جديد")}</button>`;$("#rd").onclick=()=>{location.href="ghostradio.html"};$("#rs").onclick=()=>{ci=0;res.length=0;dq()};const bd=document.createElement("button");bd.textContent="📸 "+L("Save my badge","احفظي شارتي");bd.onclick=()=>badge(sc>=4?L("Chief Engineer","كبير المهندسين"):L("Mission Engineer","مهندس مهمة"),sc+"/"+D.length+L(" cases solved"," حالات محلولة"));q.appendChild(bd);return}
+ const d=D[ci];q.innerHTML=`<p class="lead">${ci+1}/${D.length} · <b>${d.n}</b></p><p class="tel">${L(d.t[0],d.t[1])}</p>`+d.o.map((o,i)=>`<button class="op" data-i="${i}">${L(o[0],o[1])}</button>`).join("")+`<p class="msg" id="why"></p>`;
+ const show=sel=>{q.querySelectorAll(".op").forEach(x=>{x.disabled=true;if(+x.dataset.i===d.c)x.classList.add("ok")});if(sel!==d.c)q.querySelector(`.op[data-i="${sel}"]`).classList.add("no");$("#why").innerHTML=L(d.w[0],d.w[1])+`<br><button class="pr" id="nx">${ci===D.length-1?L("Finish ✓","إنهاء ✓"):L("Next →","التالي ←")}</button>`;$("#nx").onclick=()=>{ci++;dq()}};
+ q.querySelectorAll(".op").forEach(b=>b.onclick=()=>{res[ci]=+b.dataset.i;show(res[ci])});
+ if(res[ci]!==undefined)show(res[ci])}
+const WR=[["Sojourner","سوجورنر","7 days","7 أيام","~85 days","~85 يومًا",12],["Spirit","سبيريت","90 days","90 يومًا","~6 years","~6 سنوات",25],["Opportunity","أوبورتيونيتي","90 days","90 يومًا","~14 years","~14 سنة",57],["Ingenuity","إنجينيويتي","30 days","30 يومًا","~3 years, 72 flights","~3 سنوات و72 رحلة",32]];
+function rw(){$("#wr").innerHTML=WR.map(r=>`<div class="wrow"><em>×${r[6]}</em><b>${L(r[0],r[1])}</b><div class="bar2"><i class="a"></i><i class="p" style="--p:${Math.max(3,100/r[6])}%"></i></div><small>${L("Plan","المخطط")}: ${L(r[2],r[3])} · ${L("Actual","الفعلي")}: ${L(r[4],r[5])}</small></div>`).join("")}
+function badge(title,sub){const c=document.createElement("canvas");c.width=c.height=1080;const x=c.getContext("2d"),gr=x.createLinearGradient(0,0,1080,1080);gr.addColorStop(0,"#0b1330");gr.addColorStop(.6,"#2a1650");gr.addColorStop(1,"#5a2a14");x.fillStyle=gr;x.fillRect(0,0,1080,1080);
+ for(let i=0;i<140;i++){x.fillStyle=`rgba(200,225,255,${Math.random()*.8})`;x.fillRect(Math.random()*1080,Math.random()*1080,2,2)}
+ x.textAlign="center";if(lang==="ar")x.direction="rtl";x.fillStyle="#5ee7ff";x.font="700 46px sans-serif";x.fillText("SPACE RELICS",540,150);x.font="220px serif";x.fillText("🛰️",540,430);
+ x.fillStyle="#fff";x.font="800 90px sans-serif";x.fillText(title,540,610);x.fillStyle="#ff9a4d";x.font="54px sans-serif";x.fillText(sub,540,710);
+ x.fillStyle="#9fb0cc";x.font="32px sans-serif";x.fillText("mohamedmahdy5060-collab.github.io/Nasa-space_relics",540,1000);
+ c.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="space-relics-badge.png";a.click()})}
+function setL(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";document.querySelectorAll("[data-a]").forEach(e=>{e.textContent=lang==="ar"?e.dataset.a:e.dataset.e});document.querySelector(".lg").textContent=lang==="ar"?"English":"العربية";$("#ds").textContent=L("Start","ابدأ");dl();lab();rw();dq()}
+document.querySelector(".lg").onclick=()=>{lang=lang==="ar"?"en":"ar";try{localStorage.sr_lang=lang}catch(e){}setL()};
+newMap();setL();
+</script>
+</body>
+</html>
