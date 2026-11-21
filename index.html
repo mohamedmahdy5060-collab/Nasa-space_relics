@@ -10,6 +10,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Space+Grotesk:wght@400;500;700&family=Tajawal:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="style.css">
+<style>
+.sil{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.sw{padding:16px;border-radius:20px;background:var(--glass);border:1px solid var(--line)}.sw h3{margin:0 0 6px}
+.chip2{padding:8px 12px;margin:6px 0;border-radius:12px;border:1px solid var(--line);font-size:.88rem;color:var(--mut);transition:.6s;opacity:.3}
+.chip2.on{opacity:1;color:var(--ink);border-color:var(--cy);box-shadow:0 0 18px #5ee7ff44}
+.chip2.live{opacity:1;color:var(--ink);border-color:var(--or);box-shadow:0 0 18px #ff9a4d66}
+.chip2.off{opacity:.55;filter:grayscale(1);text-decoration:line-through}
+.sbar{display:flex;gap:12px;align-items:center;margin-top:18px}.sbar input{flex:1;accent-color:var(--cy);height:40px;direction:ltr}.sbar b{font:700 1.2rem Orbitron,sans-serif;color:var(--or)}
+@media(max-width:700px){.sil{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <canvas id="stars"></canvas>
@@ -24,13 +34,13 @@
   <h1><span>SPACE</span><span>RELICS</span></h1>
   <h2>They left. Their legacy didn't.</h2>
   <p>Step inside a museum without walls. Meet the machines, experiments and landers humans left on the Moon and Mars, and hear why their stories still matter.</p>
-  <a class="btn" href="#archive">ENTER THE ARCHIVE <b>↓</b></a> <a class="btn ghost" href="ghostradio.html">📻 GHOST RADIO</a>
+  <a class="btn" href="#archive">ENTER THE ARCHIVE <b>↓</b></a> <a class="btn ghost" href="ghostradio.html">📻 GHOST RADIO</a> <a class="btn ghost" href="rescue.html">🛠️ RESCUE LAB</a>
  </div>
  <div class="scroll">SCROLL</div>
 </header>
 
 <nav>
- <a href="#about">The Mission</a><a href="#archive">Archive</a><a href="#quiz">Quiz</a><a href="#timeline">Timeline</a><a href="#legacy">Legacy</a><a href="#game">Game</a><a href="ghostradio.html">Radio</a><a href="#sources">Sources</a>
+ <a href="#about">The Mission</a><a href="#archive">Archive</a><a href="#quiz">Quiz</a><a href="#timeline">Timeline</a><a href="#legacy">Legacy</a><a href="#game">Game</a><a href="ghostradio.html">Radio</a><a href="#sources">Sources</a><a href="rescue.html">🛠️ Rescue Lab</a>
 <button class="lgb nb" style="margin:0">العربية</button></nav>
 
 <section id="about" class="rv">
@@ -80,6 +90,15 @@
   <div class="ti"><strong>2022</strong>NASA retires the InSight lander after it stops communicating.</div>
   <div class="ti"><strong>2024</strong>Ingenuity ends its flights after 72 trips, following rotor damage.</div>
  </div>
+</section>
+
+<section id="silence" class="rv">
+ <div class="kick">THE FADING</div>
+ <h2 class="title">The map <em>goes quiet.</em></h2>
+ <p class="lead">Drag through time, or press play. Watch each machine light up, then fall silent.</p>
+ <div class="sil"><div class="sw"><h3>🌕</h3><div id="s-m"></div></div><div class="sw"><h3>🔴</h3><div id="s-r"></div></div></div>
+ <div class="sbar"><button class="nb" id="s-p" style="margin:0">▶</button><input type="range" id="s-y" min="1967" max="2025" value="1967" aria-label="Year"><b id="s-yr">1967</b></div>
+ <p class="lead" id="s-c"></p>
 </section>
 
 <section id="legacy" class="rv">
@@ -135,5 +154,20 @@
 <script src="relics_ar.js"></script>
 <script src="script.js"></script>
 <script src="lander.js"></script>
+<script>
+(function(){const S=[[0,1969,1969.6],[1,1971,1972.9],[2,1969,1977.7],[3,1969,null],[4,1967,1967.4],[5,1997,1997.8],[6,2004,2010.2],[7,2004,2018.4],[8,2008,2008.9],[9,2018,2022.95],[10,2021,2024.05]];
+const $=s=>document.querySelector(s),y=$("#s-y");let tm=null;
+function sil(){const yr=+y.value;let on=0,off=0;$("#s-m").innerHTML=$("#s-r").innerHTML="";
+ S.forEach(([i,a,b])=>{const r=R[i],x=T(r),st=yr<a?"":b===null?"live":yr>=b?"off":"on";if(st==="on"||st==="live")on++;if(st==="off")off++;
+  const d=document.createElement("div");d.className="chip2 "+st;d.textContent=x.e+" "+x.n+(st==="live"?" ✦":"");$(r.w==="Moon"?"#s-m":"#s-r").appendChild(d)});
+ $("#s-yr").textContent=yr;
+ $("#s-c").textContent=L(`Working or still answering: ${on} · Gone silent: ${off} of ${S.length}`,`تعمل أو ما زالت ترد: ${on} · صمتت: ${off} من ${S.length}`)+(yr>=2025?L(" · Only the laser reflector still answers."," · العاكس الليزري وحده ما زال يرد."):"");
+ $("#silence .kick").textContent=L("THE FADING","التلاشي");$("#silence .title").innerHTML=L("The map <em>goes quiet.</em>","الخريطة <em>تصمت.</em>");
+ $("#silence .lead").textContent=L("Drag through time, or press play. Watch each machine light up, then fall silent.","اسحبي عبر الزمن أو اضغطي تشغيل. شاهدي كل آلة تضيء ثم تصمت.")}
+y.oninput=sil;
+$("#s-p").onclick=()=>{if(tm){clearInterval(tm);tm=null;$("#s-p").textContent="▶";return}if(+y.value>=2025)y.value=1967;$("#s-p").textContent="⏸";
+ tm=setInterval(()=>{y.value=+y.value+1;sil();if(+y.value>=2025){clearInterval(tm);tm=null;$("#s-p").textContent="▶"}},700)};
+const o=window.onLang;window.onLang=()=>{o&&o();sil()};sil()})();
+</script>
 </body>
 </html>
