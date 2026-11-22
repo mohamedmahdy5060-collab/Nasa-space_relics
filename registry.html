@@ -52,10 +52,46 @@ summary .sc{color:var(--gold);font-weight:600;white-space:nowrap}
 <div class="wrap">
 <a href="index.html" style="font-size:14px">← Back to the museum</a>
 <h1 style="margin-top:26px">Relic Registry</h1>
-<p class="lead">One public record for every machine NASA left on the Moon and Mars. Each entry tells the story, and the same data helps NASA protect assets, plan missions and cut costs. The registry also logs landers from other countries and companies, so it works as one ledger for everything humans have put on the surface.</p>
+<p class="lead">One public record for every machine NASA left on the Moon and Mars. Each entry tells the story. The same data powers paid services that bring money to NASA and protect what is already on the Moon. The registry also logs landers from other countries and companies, so it works as one ledger for everything humans have put on the surface.</p>
+
+<section id="money" style="margin-top:34px">
+<h2>How money reaches NASA</h2>
+<p class="who">Proposed model: NASA runs the registry. Companies, schools and the public pay NASA for reports, subscriptions and stories. Prices are assumptions to test with real customers.</p>
+<div class="card">
+<p style="margin-top:0"><b>Core services</b> (the main income)</p>
+<div id="core"></div>
+<div style="margin-top:14px">Core income for NASA</div>
+<div class="big" id="t1"></div>
+<details style="margin-top:18px"><summary><span class="nm">Extra income ideas</span><span class="sc">Needs NASA approval</span></summary>
+<div class="body" id="extra"></div></details>
+<details style="margin-top:12px"><summary><span class="nm">Story-driven income</span><span class="sc">Income for NASA</span></summary>
+<div class="body"><p style="margin-top:0;color:var(--mute);font-size:14px">These grow from the stories themselves. In this proposal NASA runs the registry, so this income goes to NASA. Some of it needs NASA approval first.</p><div id="story"></div>
+<div>Story-driven income for NASA</div><div class="big" id="t4"></div></div></details>
+<div style="margin-top:14px">Total proposed income for NASA</div>
+<div class="big" id="t3"></div>
+<button id="qb">Copy quote summary</button>
+<pre id="qo" class="note" style="white-space:pre-wrap;font-family:inherit" aria-live="polite"></pre>
+<div style="margin-top:22px;padding-top:16px;border-top:1px solid var(--line)">
+<div class="pl"><span>Volunteer tasks per year</span><span>5 min each, $40 per hour analyst time</span></div>
+<label for="vt">Tasks: <b id="vtv"></b></label><input id="vt" type="range" min="0" max="100000" step="1000" value="30000">
+<div>Analyst time NASA saves (a saving, not income)</div><div class="big" id="t2"></div>
+</div>
+<p class="note">NASA images and data are free for everyone, so customers pay for the analysis, the report and the service. NASA already works with companies through agreements where the company covers NASA's costs. Whether NASA can keep fees like these is for NASA to decide, so we present this as a proposal.</p>
+</div>
+</section>
+
+<section id="ideas">
+<h2>12 ways this helps NASA financially</h2>
+<p class="who">Each idea is tied to the challenge: keeping abandoned equipment from being forgotten. Nine bring income. Three save money. All are proposals.</p>
+<div>
+<button class="ghost on" data-g="all">All 12</button><button class="ghost" data-g="Direct income">Direct income</button><button class="ghost" data-g="Saves money">Saves money</button>
+</div>
+<div id="ideal"></div>
+<p class="note">Prices and results are assumptions to test with real customers. NASA decides whether it can collect fees, and some ideas need its approval first.</p>
+</section>
 
 <section id="registry">
-<h2>1. The Registry</h2>
+<h2>The Registry</h2>
 <p class="who">Story on the surface, usable data underneath.</p>
 <div>
 <button class="ghost on" data-f="all">All</button><button class="ghost" data-f="Moon">Moon</button><button class="ghost" data-f="Mars">Mars</button>
@@ -65,7 +101,7 @@ summary .sc{color:var(--gold);font-weight:600;white-space:nowrap}
 </section>
 
 <section id="verify">
-<h2>2. Landing Verification</h2>
+<h2>Landing Verification</h2>
 <p class="who">For lander companies and insurers: independent proof of where a lander ended up.</p>
 <div class="card">
 <p style="margin-top:0">This has happened for real. In 2019 India's Vikram lander lost contact just before touchdown. An Indian engineer compared old and new images from NASA's Moon orbiter and spotted debris about 750 m from the main crash site, and NASA confirmed it. A registry can turn that into a repeatable service.</p>
@@ -78,7 +114,7 @@ summary .sc{color:var(--gold);font-weight:600;white-space:nowrap}
 </section>
 
 <section id="change">
-<h2>3. Change Detector</h2>
+<h2>Change Detector</h2>
 <p class="who">Compares an old and a new image of the same spot and flags what is different. It supports verification, the volunteer tasks and the material study.</p>
 <div class="card">
 <svg id="cd" viewBox="0 0 300 200" role="img" aria-label="Before and after view of the same patch of ground"></svg>
@@ -90,7 +126,7 @@ summary .sc{color:var(--gold);font-weight:600;white-space:nowrap}
 </section>
 
 <section id="planner">
-<h2>4. Mission Planner</h2>
+<h2>Mission Planner</h2>
 <p class="who">For lander companies: check a landing point against historic sites and see which relics are nearby.</p>
 <div class="card">
 <div class="row">
@@ -108,7 +144,7 @@ summary .sc{color:var(--gold);font-weight:600;white-space:nowrap}
 </section>
 
 <section id="plume">
-<h2>5. Plume Damage Predictor</h2>
+<h2>Plume Damage Predictor</h2>
 <p class="who">Landing engines throw dust and rock sideways. Apollo 12 landed about 155 m from Surveyor 3, and the old probe was sandblasted.</p>
 <div class="card">
 <label for="mass">Lander mass: <b id="mv"></b></label>
@@ -122,7 +158,7 @@ summary .sc{color:var(--gold);font-weight:600;white-space:nowrap}
 </section>
 
 <section id="citizen">
-<h2>6. Citizen Scientist</h2>
+<h2>Citizen Scientist</h2>
 <p class="who">Volunteers help describe how each relic looks today, so NASA spends less analyst time.</p>
 <div class="card">
 <div id="task"></div>
@@ -132,30 +168,6 @@ summary .sc{color:var(--gold);font-weight:600;white-space:nowrap}
 </div>
 </section>
 
-<section id="value">
-<h2>7. Value for NASA</h2>
-<p class="who">Honest numbers: cost recovery and time saved. None of this is NASA data, so change the assumptions.</p>
-<div class="card">
-<div class="pl"><span>Compliance check fee</span><span>$30,000 per company per year</span></div>
-<label for="c1">Companies subscribing: <b id="v1"></b></label><input id="c1" type="range" min="0" max="40" value="10">
-<div class="pl" style="margin-top:14px"><span>Plume report fee</span><span>$15,000 per mission</span></div>
-<label for="c2">Reports per year: <b id="v2"></b></label><input id="c2" type="range" min="0" max="30" value="8">
-<div class="pl" style="margin-top:14px"><span>Landing verification report fee</span><span>$20,000 per mission</span></div>
-<label for="c4">Reports per year: <b id="v4"></b></label><input id="c4" type="range" min="0" max="30" value="6">
-<div class="pl" style="margin-top:14px"><span>Volunteer tasks completed per year</span><span>5 min each, $40 per hour analyst time</span></div>
-<label for="c3">Tasks: <b id="v3"></b></label><input id="c3" type="range" min="0" max="100000" step="1000" value="30000">
-<div style="margin-top:18px">Fees that recover the cost of running the service</div>
-<div class="big" id="t1"></div>
-<div style="margin-top:8px">Analyst time saved by volunteers</div>
-<div class="big" id="t2"></div>
-<ul class="list">
-<li>Protects relics and sites from landing damage.</li>
-<li>Gives mission planners a ready catalogue of recoverable hardware.</li>
-<li>Turns public interest in the story into public support for the Moon programme.</li>
-</ul>
-<p class="note">Say it plainly to the judges: this saves money and recovers costs. It is not a profit machine.</p>
-</div>
-</section>
 </div>
 
 <script>
@@ -234,12 +246,54 @@ function cd(){
  $("cd").innerHTML=`<defs><clipPath id="cl"><rect x="${x}" y="0" width="${300-x}" height="200"/></clipPath></defs>${scene(false)}<g clip-path="url(#cl)">${scene(true)}</g><line x1="${x}" y1="0" x2="${x}" y2="200" stroke="#f2b35a" stroke-width="2"/><text x="8" y="16" fill="#98a3c2" font-size="11">before</text><text x="292" y="16" fill="#98a3c2" font-size="11" text-anchor="end">after</text>`;}
 $("cs").oninput=cd;$("hl").onclick=()=>{hlOn=!hlOn;$("hl").textContent=hlOn?"Hide the change":"Highlight the change";cd();};cd();
 
-// Value
-function val(){const a=+$("c1").value,b=+$("c2").value,c=+$("c3").value,d=+$("c4").value;
- $("v1").textContent=a;$("v2").textContent=b;$("v3").textContent=c.toLocaleString();$("v4").textContent=d;
- $("t1").textContent="$"+(a*30000+b*15000+d*20000).toLocaleString()+" / year";
- $("t2").textContent="$"+Math.round(c*5/60*40).toLocaleString()+" / year";}
-["c1","c2","c3","c4"].forEach(i=>$(i).oninput=val);val();
+// Pricing
+const PR=[
+["Landing verification report","Lander companies and insurers",20000,"per mission",6,30,1],
+["Compliance subscription","Lander companies",30000,"per year",10,40,1],
+["Change alerts subscription","Lander companies and insurers",12000,"per year",8,40,1],
+["Site briefing report","Lander companies planning a landing",8000,"per site",10,40,1],
+["Site risk report","Insurers",10000,"per site",8,40,0],
+["Education licence","Schools, museums, planetariums",2000,"per year",50,300,0],
+["API access","Insurers and analysts",6000,"per client per year",5,30,0],
+["Space agency licence","Smaller and new space agencies",40000,"per agency per year",2,10,0],
+["Relic sponsorship","Companies and foundations",5000,"per relic per year",6,30,0],
+["Merchandise","Public (check NASA branding rules first)",15,"profit per item",2000,20000,0],
+["Ghost Radio premium episodes","Listeners",24,"per listener per year",1000,20000,2],
+["Classroom story kit","Teachers",50,"per teacher",300,3000,2],
+["Story licence for media","Documentary and video makers",3000,"per licence",5,30,2],
+["Adopt a relic (donation)","Space fans",25,"per donation",500,10000,2]];
+const row=(p,i)=>`<div style="margin-bottom:16px"><div class="pl"><span><b>${p[0]}</b></span><span>$${p[2].toLocaleString()} ${p[3]}</span></div><div style="font-size:13px;color:var(--mute)">Who pays: ${p[1]}</div><label for="q${i}" style="margin:2px 0">Quantity: <b id="qv${i}"></b> = <b id="qs${i}"></b></label><input id="q${i}" type="range" min="0" max="${p[5]}" step="${p[5]>1000?100:1}" value="${p[4]}"></div>`;
+$("core").innerHTML=PR.map((p,i)=>p[6]===1?row(p,i):"").join("");
+$("extra").innerHTML=PR.map((p,i)=>p[6]===0?row(p,i):"").join("");
+$("story").innerHTML=PR.map((p,i)=>p[6]===2?row(p,i):"").join("");
+function money(){let c=0,e=0,g=0;PR.forEach((p,i)=>{const q=+$("q"+i).value,v=q*p[2];if(p[6]===1)c+=v;else if(p[6]===2)g+=v;else e+=v;$("qv"+i).textContent=q.toLocaleString();$("qs"+i).textContent="$"+v.toLocaleString();});
+ $("t1").textContent="$"+c.toLocaleString()+" / year";$("t4").textContent="$"+g.toLocaleString()+" / year";$("t3").textContent="$"+(c+e+g).toLocaleString()+" / year";
+ const v=+$("vt").value;$("vtv").textContent=v.toLocaleString();$("t2").textContent="$"+Math.round(v*5/60*40).toLocaleString()+" / year";return c+e+g;}
+PR.forEach((p,i)=>$("q"+i).oninput=money);$("vt").oninput=money;money();
+$("qb").onclick=()=>{
+ const lines=PR.map((p,i)=>[p,+$("q"+i).value]).filter(x=>x[1]>0).map(x=>`${x[0][0]}: ${x[1].toLocaleString()} x $${x[0][2].toLocaleString()} ${x[0][3]} = $${(x[1]*x[0][2]).toLocaleString()}`);
+ const txt="Relic Registry quote summary (assumed prices)\n"+(lines.length?lines.join("\n"):"No items selected")+"\nTotal: $"+money().toLocaleString();
+ $("qo").textContent=txt;
+ try{navigator.clipboard.writeText(txt);}catch(e){}
+};
+// Ideas
+const ID=[
+["Landing verification report","Direct income","Tracks every lander left on the surface, including ones that crashed or went silent.","Companies and insurers pay NASA a fee for each independent report."],
+["Compliance subscription","Direct income","Keeps new landers away from historic sites so old equipment is not damaged.","Companies pay NASA a yearly subscription."],
+["Change alerts","Direct income","Watches relics all the time, so a change is never missed.","Companies pay NASA a subscription to get alerts near their site."],
+["Site briefing report","Direct income","Shows which relics sit near a planned landing site.","Companies pay NASA a fee for each site."],
+["Space agency licence","Direct income","Gives smaller agencies a ready record of what is already on the surface.","New agencies pay NASA a yearly licence instead of building their own record."],
+["Premium Ghost Radio","Direct income","Stories keep each machine in people's memory.","Listeners pay NASA a subscription for extra episodes."],
+["Museum and planetarium licence","Direct income","Takes the relic stories to visitors around the world.","Museums and planetariums pay NASA a licence fee."],
+["Media licence","Direct income","Lets filmmakers retell the stories of forgotten machines.","Documentary and video makers pay NASA for the right to use the processed stories and images."],
+["Adopt a relic","Direct income","Lets fans take a personal interest in one machine.","Donors give NASA a small amount to adopt a relic. Needs NASA approval first."],
+["Reuse catalogue","Saves money","Records which relics hold metals and parts that could be used again.","Planners reuse material on the surface instead of launching new material from Earth."],
+["Material durability data","Saves money","Shows how materials survived decades on the Moon.","NASA saves on ground tests. It could also sell the analysis to material makers."],
+["Volunteer image checks","Saves money","Gets the public to look at relics and report changes.","NASA saves analyst hours."]];
+function ideas(f){
+ $("ideal").innerHTML=ID.filter(x=>f==="all"||x[1]===f).map(x=>`<details><summary><span class="nm">${x[0]}</span><span class="sc">${x[1]}</span></summary><div class="body"><p style="margin-top:0"><b>Link to the challenge:</b> ${x[2]}</p><p style="margin-bottom:0"><b>How NASA benefits:</b> ${x[3]}</p></div></details>`).join("");}
+document.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-g]").forEach(x=>x.classList.remove("on"));b.classList.add("on");ideas(b.dataset.g);});
+ideas("all");
 </script>
 </body>
 </html>
