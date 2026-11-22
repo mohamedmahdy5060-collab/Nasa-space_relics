@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relic Registry | Space Relics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#04060f;--panel:#0b1022;--line:#1d2744;--text:#e8ecf7;--mute:#98a3c2;--gold:#f2b35a;--ok:#5fd4a0;--bad:#ff6b5e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 "IBM Plex Sans",system-ui,sans-serif}
+a{color:var(--gold)}
+.wrap{max-width:900px;margin:0 auto;padding:20px 18px 70px}
+h1{font:600 clamp(34px,7vw,56px)/1.05 Fraunces,Georgia,serif;margin:0 0 14px}
+h2{font:600 26px/1.2 Fraunces,Georgia,serif;margin:0 0 6px}
+.lead{color:var(--mute);max-width:62ch;margin:0 0 8px}
+section{margin-top:54px;padding-top:28px;border-top:1px solid var(--line)}
+.who{color:var(--gold);font-size:14px;margin:0 0 14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+label{display:block;font-size:14px;color:var(--mute);margin:10px 0 4px}
+input{width:100%;background:#050813;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:10px;font:inherit}
+input[type=range]{padding:0;accent-color:var(--gold)}
+button{background:var(--gold);color:#1a1100;border:0;border-radius:6px;padding:10px 16px;font:600 15px inherit;cursor:pointer;margin:12px 8px 0 0}
+button.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+button.on{background:var(--gold);color:#1a1100}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.res{margin-top:14px;padding:12px 14px;border-radius:8px;border-left:4px solid var(--line);background:#050813}
+.res.ok{border-color:var(--ok)}.res.bad{border-color:var(--bad)}
+.res b{display:block;font-size:18px}
+.note{font-size:13px;color:var(--mute);margin-top:10px}
+svg{width:100%;max-height:280px;background:#050813;border-radius:8px;border:1px solid var(--line)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-top:10px}
+summary{cursor:pointer;padding:14px 16px;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary .nm{font-weight:600}
+summary .sc{color:var(--gold);font-weight:600;white-space:nowrap}
+.body{padding:0 16px 16px}
+.bar{display:flex;align-items:center;gap:10px;font-size:14px;margin:6px 0;color:var(--mute)}
+.bar i{flex:1;height:8px;background:#050813;border-radius:4px;overflow:hidden}
+.bar i b{display:block;height:100%;background:var(--gold)}
+.bar span:first-child{width:112px}
+.pl{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.big{font:600 clamp(32px,8vw,52px)/1 Fraunces,Georgia,serif;color:var(--gold);margin:4px 0}
+.list{margin:10px 0 0;padding-left:18px;color:var(--mute);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a href="index.html" style="font-size:14px">← Back to the museum</a>
+<h1 style="margin-top:26px">Relic Registry</h1>
+<p class="lead">One public record for every machine NASA left on the Moon and Mars. Each entry tells the story, and the same data helps NASA protect assets, plan missions and cut costs. The registry also logs landers from other countries and companies, so it works as one ledger for everything humans have put on the surface.</p>
+
+<section id="registry">
+<h2>1. The Registry</h2>
+<p class="who">Story on the surface, usable data underneath.</p>
+<div>
+<button class="ghost on" data-f="all">All</button><button class="ghost" data-f="Moon">Moon</button><button class="ghost" data-f="Mars">Mars</button>
+</div>
+<div id="list"></div>
+<p class="note">Reuse Score is our own team assessment (ease of reaching it, recoverable material, science value), not NASA data. Facts come from the NASA pages in the museum's source archive.</p>
+</section>
+
+<section id="verify">
+<h2>2. Landing Verification</h2>
+<p class="who">For lander companies and insurers: independent proof of where a lander ended up.</p>
+<div class="card">
+<p style="margin-top:0">This has happened for real. In 2019 India's Vikram lander lost contact just before touchdown. An Indian engineer compared old and new images from NASA's Moon orbiter and spotted debris about 750 m from the main crash site, and NASA confirmed it. A registry can turn that into a repeatable service.</p>
+<div class="row"><div><label for="vn">Mission name</label><input id="vn" value="Example Lander"></div><div><label for="vd">Result the company reported</label><input id="vd" value="Soft landing"></div></div>
+<div class="row"><div><label for="vp">Planned point (lat, lon)</label><input id="vp" value="-70.88, 22.78"></div><div><label for="vf">Found in images (lat, lon)</label><input id="vf" value="-70.85, 22.79"></div></div>
+<button id="vb">Build report</button>
+<div id="vr" class="res" aria-live="polite">Enter two points and press Build report.</div>
+<p class="note">Concept: compare the planned point with where images show the lander. A real report would attach the before and after image pair.</p>
+</div>
+</section>
+
+<section id="change">
+<h2>3. Change Detector</h2>
+<p class="who">Compares an old and a new image of the same spot and flags what is different. It supports verification, the volunteer tasks and the material study.</p>
+<div class="card">
+<svg id="cd" viewBox="0 0 300 200" role="img" aria-label="Before and after view of the same patch of ground"></svg>
+<label for="cs">Slide from before (left) to after (right)</label>
+<input id="cs" type="range" min="0" max="100" value="50">
+<button class="ghost" id="hl">Highlight the change</button>
+<p class="note">Illustration only, not a real image. A real version loads NASA before and after image pairs.</p>
+</div>
+</section>
+
+<section id="planner">
+<h2>4. Mission Planner</h2>
+<p class="who">For lander companies: check a landing point against historic sites and see which relics are nearby.</p>
+<div class="card">
+<div class="row">
+<div><label for="lat">Latitude (°)</label><input id="lat" type="number" step="0.0001" value="20.5"></div>
+<div><label for="lon">Longitude (°)</label><input id="lon" type="number" step="0.0001" value="30.9"></div>
+</div>
+<div class="row">
+<div><label for="buf">Keep-out buffer (km)</label><input id="buf" type="number" min="0" step="0.1" value="2"></div>
+<div><label for="rad">Show relics within (km)</label><input id="rad" type="number" min="1" value="300"></div>
+</div>
+<button id="chk">Check landing point</button><button class="ghost" id="ex">Try an example</button>
+<div id="hres" class="res" aria-live="polite">Enter coordinates and press the button.</div>
+<p class="note">The buffer is a placeholder. Use the values in NASA's lunar historic site recommendations.</p>
+</div>
+</section>
+
+<section id="plume">
+<h2>5. Plume Damage Predictor</h2>
+<p class="who">Landing engines throw dust and rock sideways. Apollo 12 landed about 155 m from Surveyor 3, and the old probe was sandblasted.</p>
+<div class="card">
+<label for="mass">Lander mass: <b id="mv"></b></label>
+<input id="mass" type="range" min="500" max="100000" step="500" value="15000">
+<label for="dist">Distance to nearest relic: <b id="dv"></b></label>
+<input id="dist" type="range" min="50" max="3000" step="10" value="300">
+<svg id="pv" viewBox="0 0 300 300" role="img" aria-label="Plume radius around a lander and a relic"></svg>
+<div id="pres" class="res" aria-live="polite"></div>
+<p class="note">Concept model: radius = 3 × √mass in metres. A real version needs NASA plume and regolith data.</p>
+</div>
+</section>
+
+<section id="citizen">
+<h2>6. Citizen Scientist</h2>
+<p class="who">Volunteers help describe how each relic looks today, so NASA spends less analyst time.</p>
+<div class="card">
+<div id="task"></div>
+<div id="ctl"></div>
+<div id="cres" class="note" aria-live="polite"></div>
+<p class="note">Demo only. The real version shows a before and after LRO image pair for each task. Answers here are not saved.</p>
+</div>
+</section>
+
+<section id="value">
+<h2>7. Value for NASA</h2>
+<p class="who">Honest numbers: cost recovery and time saved. None of this is NASA data, so change the assumptions.</p>
+<div class="card">
+<div class="pl"><span>Compliance check fee</span><span>$30,000 per company per year</span></div>
+<label for="c1">Companies subscribing: <b id="v1"></b></label><input id="c1" type="range" min="0" max="40" value="10">
+<div class="pl" style="margin-top:14px"><span>Plume report fee</span><span>$15,000 per mission</span></div>
+<label for="c2">Reports per year: <b id="v2"></b></label><input id="c2" type="range" min="0" max="30" value="8">
+<div class="pl" style="margin-top:14px"><span>Landing verification report fee</span><span>$20,000 per mission</span></div>
+<label for="c4">Reports per year: <b id="v4"></b></label><input id="c4" type="range" min="0" max="30" value="6">
+<div class="pl" style="margin-top:14px"><span>Volunteer tasks completed per year</span><span>5 min each, $40 per hour analyst time</span></div>
+<label for="c3">Tasks: <b id="v3"></b></label><input id="c3" type="range" min="0" max="100000" step="1000" value="30000">
+<div style="margin-top:18px">Fees that recover the cost of running the service</div>
+<div class="big" id="t1"></div>
+<div style="margin-top:8px">Analyst time saved by volunteers</div>
+<div class="big" id="t2"></div>
+<ul class="list">
+<li>Protects relics and sites from landing damage.</li>
+<li>Gives mission planners a ready catalogue of recoverable hardware.</li>
+<li>Turns public interest in the story into public support for the Moon programme.</li>
+</ul>
+<p class="note">Say it plainly to the judges: this saves money and recovers costs. It is not a profit machine.</p>
+</div>
+</section>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+// name, world, year, story, status, access, materials, science, lat, lon
+const R=[
+["Apollo 11 descent stage","Moon","1969","The lower half of the lander stayed on purpose to save weight for the trip home. Nearby, a laser reflector is still used to measure the Moon's distance.","Left on purpose",4,2,4,0.6741,23.4730],
+["Surveyor 3 (parts returned)","Moon","1967","Apollo 12 astronauts walked to this robot probe and brought pieces home. Scientists could then study how years on the Moon had changed real hardware.","Partly returned to Earth",4,2,5,-3.0128,-23.4219],
+["Apollo 15 Lunar Rover","Moon","1971","An electric car that carried astronauts across the Moon, then parked for good at the end of the mission.","Left on purpose",3,3,3,26.1322,3.6339],
+["Apollo 17 science station","Moon","1972","A set of instruments left running. NASA switched the Apollo stations off in 1977.","Switched off 1977",3,3,4,20.1908,30.7717],
+["Spirit rover","Mars","2004","Meant to work for 90 days, it explored far longer. NASA ended contact attempts in 2011.","Silent since 2010",1,2,3],
+["Opportunity rover","Mars","2004","Its last contact came during a planet-wide dust storm. The mission ended in 2019.","Mission ended 2019",1,2,3],
+["InSight lander","Mars","2018","A listening station for Marsquakes. NASA retired it in 2022 after it stopped communicating.","Retired 2022",1,2,4],
+["Ingenuity helicopter","Mars","2021","The first aircraft to fly on another planet. It ended its flights after 72 trips, following rotor damage.","Flights ended 2024",1,1,4],
+["Vikram lander (India)","Moon","2019","Lost contact minutes before touchdown. NASA's orbiter later imaged the crash site, guided by an engineer who spotted debris by comparing old and new images.","Crashed, later found in images",0,0,0,-70.8810,22.7840,"ISRO"],
+["Beresheet (Israel)","Moon","2019","A privately built Israeli lander that crashed in April 2019, an early sign of how many companies would now reach the Moon.","Crashed",0,0,0,null,null,"SpaceIL"]
+].map(r=>({n:r[0],w:r[1],y:r[2],s:r[3],st:r[4],a:r[5],m:r[6],sc:r[7],lat:r[8],lon:r[9],o:r[10]||"NASA",score:Math.round((r[5]+r[6]+r[7])/15*100)}));
+function bar(l,v){return `<div class="bar"><span>${l}</span><i><b style="width:${v*20}%"></b></i><span>${v}/5</span></div>`;}
+function draw(f){
+ $("list").innerHTML=R.filter(r=>f==="all"||r.w===f).map(r=>`<details><summary><span><span class="nm">${r.n}</span><br><small style="color:var(--mute)">${r.o}. ${r.w}, ${r.y}. ${r.st}</small></span><span class="sc">${r.o==="NASA"?"Reuse "+r.score:"Logged"}</span></summary>
+ <div class="body"><p style="margin-top:0">${r.s}</p>${r.o==="NASA"?bar("Reachable",r.a)+bar("Material",r.m)+bar("Science value",r.sc):""}</div></details>`).join("");
+}
+document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-f]").forEach(x=>x.classList.remove("on"));b.classList.add("on");draw(b.dataset.f);});
+draw("all");
+
+// Planner
+const km=(a,b,c,d)=>{const r=Math.PI/180,h=Math.sin((c-a)*r/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin((d-b)*r/2)**2;return 2*1737.4*Math.asin(Math.sqrt(h));};
+function check(){
+ const la=+$("lat").value,lo=+$("lon").value,bf=+$("buf").value,rd=+$("rad").value,el=$("hres");
+ if([$("lat").value,$("lon").value].some(v=>v==="")||Math.abs(la)>90||Math.abs(lo)>180){el.className="res bad";el.innerHTML="<b>Check your input</b>Latitude must be -90 to 90 and longitude -180 to 180.";return;}
+ const near=R.filter(r=>r.lat!=null).map(r=>({n:r.n,d:km(la,lo,r.lat,r.lon)})).sort((a,b)=>a.d-b.d);
+ const best=near[0],ok=best.d>=bf,inr=near.filter(x=>x.d<=rd);
+ el.className="res "+(ok?"ok":"bad");
+ el.innerHTML=(ok?`<b>Clear of the keep-out buffer</b>Closest relic: ${best.n}, ${best.d.toFixed(1)} km away.`:`<b>Inside the keep-out buffer</b>Closest relic: ${best.n}, only ${best.d.toFixed(1)} km away. Move the landing point or request a review.`)+
+ `<ul class="list">${inr.length?inr.map(x=>`<li>${x.n}: ${x.d.toFixed(0)} km</li>`).join(""):"<li>No relics within "+rd+" km.</li>"}</ul>`;
+}
+$("chk").onclick=check;$("ex").onclick=()=>{$("lat").value=20.2;$("lon").value=30.8;check();};
+
+// Plume
+function plume(){
+ const m=+$("mass").value,d=+$("dist").value,rr=3*Math.sqrt(m);
+ $("mv").textContent=m.toLocaleString()+" kg";$("dv").textContent=d.toLocaleString()+" m";
+ const s=130/(Math.max(rr,d)*1.15),c=150,rx=Math.min(c+d*s,285);
+ $("pv").innerHTML=`<circle cx="${c}" cy="${c}" r="${(rr*s).toFixed(1)}" fill="rgba(255,107,94,.14)" stroke="#ff6b5e" stroke-dasharray="4 4"/><circle cx="${c}" cy="${c}" r="5" fill="#f2b35a"/><text x="${c}" y="${c-12}" fill="#f2b35a" font-size="11" text-anchor="middle">lander</text><rect x="${rx-5}" y="${c-5}" width="10" height="10" fill="#e8ecf7"/><text x="${rx}" y="${c+22}" fill="#98a3c2" font-size="11" text-anchor="middle">relic</text>`;
+ const safe=d>rr;$("pres").className="res "+(safe?"ok":"bad");
+ $("pres").innerHTML=safe?`<b>Relic is outside the danger radius</b>Radius about ${Math.round(rr)} m, relic at ${d} m.`:`<b>Relic is inside the danger radius</b>Radius about ${Math.round(rr)} m, relic at only ${d} m. Dust and rock could damage it.`;
+}
+$("mass").oninput=plume;$("dist").oninput=plume;plume();
+
+// Citizen
+let ti=0,done=0;
+function task(){const r=R[ti%R.length];
+ $("task").innerHTML=`<b>${r.n}</b><br><span style="color:var(--mute)">Looking at the latest image, how does it look compared with the older one?</span>`;
+ $("ctl").innerHTML=["Looks the same","Looks changed","Can't tell"].map(t=>`<button class="ghost" data-a="${t}">${t}</button>`).join("");
+ $("ctl").querySelectorAll("button").forEach(b=>b.onclick=()=>{done++;ti++;$("cres").textContent=`Thank you. Tasks done this session: ${done}.`;task();});}
+task();
+
+// Verification
+const pp=t=>{const a=t.split(",").map(x=>parseFloat(x));return a.length===2&&a.every(x=>!isNaN(x)&&true)&&Math.abs(a[0])<=90&&Math.abs(a[1])<=180?a:null;};
+$("vb").onclick=()=>{
+ const a=pp($("vp").value),b=pp($("vf").value),el=$("vr");
+ if(!a||!b){el.className="res bad";el.innerHTML="<b>Check your input</b>Write each point as two numbers separated by a comma, for example -70.88, 22.78.";return;}
+ const d=km(a[0],a[1],b[0],b[1])*1000;
+ el.className="res ok";
+ el.innerHTML=`<b>Verification report: ${$("vn").value||"Unnamed mission"}</b>Reported result: ${$("vd").value||"not stated"}.<ul class="list"><li>Planned point to image location: ${d>=1000?(d/1000).toFixed(2)+" km":Math.round(d)+" m"}.</li><li>Evidence needed: before and after image pair of the site.</li><li>Next step: a reviewer confirms the match and signs the report.</li></ul>`;
+};
+// Change detector
+let hlOn=false;
+function scene(after){
+ let g='<rect width="300" height="200" fill="#14192b"/><circle cx="70" cy="60" r="28" fill="none" stroke="#2a3354" stroke-width="3"/><circle cx="220" cy="140" r="40" fill="none" stroke="#2a3354" stroke-width="3"/><circle cx="160" cy="50" r="10" fill="none" stroke="#2a3354" stroke-width="2"/><circle cx="120" cy="150" r="6" fill="#1d2542"/><rect x="146" y="96" width="8" height="8" fill="#9aa5c9"/>';
+ if(after){g+='<circle cx="190" cy="92" r="3" fill="#ffffff"/><circle cx="150" cy="100" r="22" fill="rgba(255,255,255,.07)"/>';
+  if(hlOn)g+='<circle cx="188" cy="92" r="14" fill="none" stroke="#f2b35a" stroke-width="2" stroke-dasharray="4 3"/>';}
+ return g;}
+function cd(){
+ const x=+$("cs").value*3;
+ $("cd").innerHTML=`<defs><clipPath id="cl"><rect x="${x}" y="0" width="${300-x}" height="200"/></clipPath></defs>${scene(false)}<g clip-path="url(#cl)">${scene(true)}</g><line x1="${x}" y1="0" x2="${x}" y2="200" stroke="#f2b35a" stroke-width="2"/><text x="8" y="16" fill="#98a3c2" font-size="11">before</text><text x="292" y="16" fill="#98a3c2" font-size="11" text-anchor="end">after</text>`;}
+$("cs").oninput=cd;$("hl").onclick=()=>{hlOn=!hlOn;$("hl").textContent=hlOn?"Hide the change":"Highlight the change";cd();};cd();
+
+// Value
+function val(){const a=+$("c1").value,b=+$("c2").value,c=+$("c3").value,d=+$("c4").value;
+ $("v1").textContent=a;$("v2").textContent=b;$("v3").textContent=c.toLocaleString();$("v4").textContent=d;
+ $("t1").textContent="$"+(a*30000+b*15000+d*20000).toLocaleString()+" / year";
+ $("t2").textContent="$"+Math.round(c*5/60*40).toLocaleString()+" / year";}
+["c1","c2","c3","c4"].forEach(i=>$(i).oninput=val);val();
+</script>
+</body>
+</html>
